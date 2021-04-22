@@ -1,0 +1,305 @@
+<div class="row card-box">
+    <div class="col-sm-3 col-lg-2" style="margin-bottom: 10px">
+        <label>Fecha Desde</label>
+        <div ng-if="dateInputSupport">
+            <input class="form-control" id="fechadesde" type="date" ng-model="objFiltro.FechaDesde" data-parsley-required />
+        </div>
+        <div ng-if="!dateInputSupport">
+            <div class="input-group date">
+                <input type="datetime" id="fechadesde" class="form-control" date-time data-parsley-required
+                       ng-model="objFiltro.FechaDesde"
+                       view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">
+                <span class=" input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3 col-lg-2" style="margin-bottom: 10px">
+        <label>Fecha Hasta</label>
+        <div ng-if="dateInputSupport">
+            <input class="form-control" id="fechahasta" type="date" ng-model="objFiltro.FechaHasta" data-parsley-required />
+        </div>
+        <div ng-if="!dateInputSupport">
+            <div class="input-group date">
+                <input type="datetime" id="fechahasta" class="form-control" date-time data-parsley-required
+                       ng-model="objFiltro.FechaHasta"
+                       view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">
+                <span class=" input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 col-lg-2" style="margin-bottom: 10px">
+        <label>Estado</label>
+        <select class="form-control" id="rol"
+                ng-model="objFiltro.EstadoID"
+                ng-options="obj.Id as obj.Descripcion for obj in lstEstados">
+            <option value="">Seleccione Estado </option>
+        </select>
+    </div>
+
+    <div class="col-sm-4 col-lg-3" ng-if="modoPagina.Modo =='Admin' || modoPagina.Modo =='Administracion'" style="margin-bottom: 10px">
+        <label>Vendedor</label>
+        <select class="form-control" id="empleo"
+                ng-model="objFiltro.VendedorID"
+                ng-options="obj.Id as obj.Nombre for obj in lstVendedores">
+            <option value="">Seleccione...</option>
+        </select>
+    </div>
+    <div class="col-sm-4 col-lg-3" ng-if="modoPagina.Modo=='Admin' || modoPagina.Modo =='Administracion' || modoPagina.Modo =='Vend'" style="margin-bottom: 10px">
+        <label>Cliente</label>
+        <input type="text" ng-model="objCliente.Descripcion" name="conc" id="conc" autocomplete="off"
+               typeahead-on-select="setCliente($item)"
+               placeholder="Buscar.."
+               uib-typeahead="e.Codigo as e.Codigo + ' ' + e.NombreComercial for e in getClientes($viewValue)"
+               class="form-control"
+               typeahead-wait-ms="250"
+               typeahead-loading="loadingLocationsArt" autocomplete="on"
+               typeahead-no-results="noResultsArt" typeahead-append-to-body="true">
+        <i ng-show="loadingLocationsArt" class="fa fa-loading"></i>
+        <span class="themesecondary" ng-show="noResultsArt">
+            <i class="fa fa-exclamation-triangle "></i> No se encontraron Clientes.
+        </span>
+    </div>
+    <div class="col-sm-4 col-lg-3" ng-if="modoPagina.Modo=='Admin' || modoPagina.Modo =='Administracion'" style="margin-bottom: 10px">
+        <label>Usuario</label>
+        <select class="form-control" id="usuario"
+                ng-model="objFiltro.UsuarioID"
+                ng-options="obj.User as obj.User +  ' - ' +  obj.NombreCompleto for obj in lstUsuarios">
+            <option value="">Seleccione...</option>
+        </select>
+    </div>
+    <div class="col-sm-4 col-lg-3" ng-if="modoPagina.Modo =='Admin' || modoPagina.Modo =='Administracion'">
+        <label>Pedido</label>
+        <input type="text" class="form-control" id="idPedido" placeholder="Id Pedido"
+               ng-model="objFiltro.PedidoId" data-parsley-required>
+    </div>
+    <div class="col-sm-4 col-lg-3" ng-if="modoPagina.Modo =='Vend'">
+        <div class="checkbox checkbox-primary pull-right">
+            <input id="activo" type="checkbox" checked="" ng-model="objFiltro.vendusuarioespec">
+            <label for="activo">
+                Solo mis pedidos
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-4 col-lg-4" style="margin-top: 25px">
+        <button class="btn btn-primary btn-sm waves-effect waves-ligh" ng-click="buscarPedidos()"><i class="ti ti-search"></i> Buscar</button>
+        <button class="btn btn-secondary btn-sm waves-effect waves-ligh" ng-click="borrarFiltros()"><i class="ti ti-trash"></i> Borrar Filtro</button>
+    </div>
+</div>
+
+<div class="row" >
+    <div class="col-md-6 col-sm-12" ng-repeat="p in lstPedidos">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label style="margin-bottom: 0px"><strong>Cliente: </strong>{{p.Cliente.Codigo}} - {{p.Cliente.NombreComercial}}</label></br>
+                    <label style="margin-bottom: 0px"><strong>O. Compra: </strong> {{p.ORDENCOMPRA}}</label></br>
+                    <label style="margin-bottom: 0px; font-size: 15px">
+                        <strong class="badge" ng-class="{
+                        'badge-info': p.Estado.Id==0,
+                        'badge-success': p.Estado.Id==1,
+                        'badge-danger': p.Estado.Id==2,
+                        'badge-primary': p.Estado.Id==3,
+                        'badge-warning': p.Estado.Id==4,
+                        'badge-tomado': p.Estado.Id==5,
+                        'badge-eliminado': p.Estado.Id==6,
+                        'badge-importado': p.Estado.Id==7,
+                        'badge-preenviado': p.Estado.Id==8}">{{p.Estado.Descripcion}}</strong>
+                    </label></br>
+                    <label style="margin-bottom: 0px"><strong>Fecha: </strong> {{p.FECHA |date:'dd/MM/yyyy'}}</label></br>
+                    <label style="margin-bottom: 0px"><strong>Importe: </strong> {{p.TOTAL |number:2}}</label></br>
+                    <label style="margin-bottom: 0px"><strong>Vendedor: </strong> {{p.NOMVENDEDOR}}</label></br>
+                    <label style="margin-bottom: 0px"><strong>Usuario: </strong> {{p.USUSARIO}}</label></br>
+                    <label style="margin-bottom: 0px"><strong>Observaciones: </strong> {{p.OBSERVACIONES}}</label></br>
+
+                </div>
+            </div>
+            <div class="row m-t-15">
+                <div class="col-sm-12 muestroBotonesCel text-center">
+                    <button ng-if="p.Estado.Id>=0" class="btn btn-outline-secondary btn-sm waves-effect waves-light btnCelularCuadrados" style="margin-bottom: 5px"
+                            ng-click="verDetalle(p)"><i class="fa fa-search" style="display: block"></i> Detalle</button>
+                    <button ng-if="p.Estado.Id==0 || (p.Estado.Id==8 && (modoPagina.Modo =='Administracion' || modoPagina.Modo =='Admin'))"
+                            class="btn btn-outline-secondary btn-sm waves-effect waves-light btnCelularCuadrados" style="margin-bottom: 5px"
+                            ng-click="verPedido(p)"><i class="fa fa-edit" style="display: block"></i> Editar</button>
+                    <button ng-if="p.Estado.Id==0 || (p.Estado.Id==8 && (modoPagina.Modo =='Administracion' || modoPagina.Modo =='Admin'))"
+                            class="btn btn-outline-secondary btn-sm waves-effect waves-light btnCelularCuadrados" style="margin-bottom: 5px"
+                            ng-click="enviarPedido(p)"><i class="fa fa-send-o" style="display: block"></i> Enviar</button>
+                    <button ng-if="(p.Estado.Id==0 || p.Estado.Id==8) && modoPagina.Modo !='Dist'"
+                            class="btn btn-outline-secondary btn-sm waves-effect waves-light btnCelularCuadrados" style="margin-bottom: 5px"
+                            ng-click="enviarPedidoUrgente(p)"><i class="fa fa-send" style="display: block"></i> Urgente</button>
+
+                    <button ng-if="p.Estado.Id==0 || (p.Estado.Id==8 && (modoPagina.Modo =='Administracion' || modoPagina.Modo =='Admin'))"
+                            class="btn btn-outline-secondary btn-sm waves-effect waves-light btnCelularCuadrados" style="margin-bottom: 5px"
+                            ng-click="cancelarPedido(p)"><i class="fa fa-times" style="display: block"></i> Cancel</button>
+                </div>
+                <div class="col-sm-12 ocultoBotonesCel text-right">
+                    <button ng-if="p.Estado.Id>=0" class="btn btn-outline-secondary btn-sm waves-effect waves-light btnPedido" style="margin-bottom: 5px"
+                            ng-click="verDetalle(p)"><i class="fa fa-search"></i> Detalle Pedido</button>
+                    <button ng-if="p.Estado.Id==0 || (p.Estado.Id==8 && (modoPagina.Modo =='Administracion' || modoPagina.Modo =='Admin'))"  class="btn btn-outline-secondary btn-sm waves-effect waves-light btnPedido" style="margin-bottom: 5px"
+                            ng-click="verPedido(p)"><i class="fa fa-edit"></i> Editar</button>
+                    <button ng-if="p.Estado.Id==0 || (p.Estado.Id==8 && (modoPagina.Modo =='Administracion' || modoPagina.Modo =='Admin'))"  class="btn btn-outline-secondary btn-sm waves-effect waves-light btnPedido" style="margin-bottom: 5px"
+                            ng-click="enviarPedido(p)"><i class="fa fa-send-o"></i> Enviar</button>
+                    <button ng-if="(p.Estado.Id==0 || p.Estado.Id==8) && modoPagina.Modo !='Dist'" class="btn btn-outline-secondary btn-sm waves-effect waves-light btnPedido" style="margin-bottom: 5px"
+                            ng-click="enviarPedidoUrgente(p)"><i class="fa fa-send"></i> Enviar Alta Prioridad</button>
+
+                    <button ng-if="p.Estado.Id==0 || (p.Estado.Id==8 && (modoPagina.Modo =='Administracion' || modoPagina.Modo =='Admin'))" class="btn btn-outline-secondary btn-sm waves-effect waves-light btnPedido" style="margin-bottom: 5px"
+                            ng-click="cancelarPedido(p)"><i class="fa fa-times"></i> Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="detallePedido" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modalMaximo">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Detalle del Pedido</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 ocultarCelularDetallePedido">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive " data-pattern="priority-columns">
+                                <table id="tech-companies-1" class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th data-priority="1">Producto</th>
+                                        <th data-priority="1" class="text-right">% Dto</th>
+                                        <th data-priority="1" class="text-right">Cantidad</th>
+                                        <th data-priority="1" class="text-right">Emp x Cant</th>
+                                        <th data-priority="1" class="text-center">Stock</th>
+                                        <th data-priority="1" class="text-right">Empaque</th>
+
+                                        <th data-priority="1" class="text-right">$ Unidad</th>
+                                        <th data-priority="1" class="text-right">$ Dto</th>
+                                        <th data-priority="1" class="text-right">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="obj in objPedido.Articulos |filter:filtro | orderBy:orderByField:reverseSort" ng-class="{'grillaSel':obj.SEL}" ng-click="obj.SEL = !obj.SEL" style="cursor: pointer">
+                                        <td data-priority="1"><span>{{obj.DESCRIPCION}}</span></td>
+                                        <td data-priority="1" class="text-right">
+                                            <span ng-if="obj.DESCUENTOESPECIAL !=null">{{obj.DESCUENTOESPECIAL |number:2}}</span>
+                                        </td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.CANTIDAD}}</span></td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.CANTIDAD * obj.EMPAQUE}}</span></td>
+                                        <td data-priority="1" class="text-center">
+                                            <span ng-if="obj.FaltaDesde==null" class="badge badge-success">Ok</span>
+                                            <span ng-if="obj.FaltaDesde!=null" class="badge badge-danger">
+                                                {{obj.FaltaDesde |date:'dd/MM/yyyy'}} - {{obj.FaltaHasta |date:'dd/MM/yyyy'}}
+                                            </span>
+                                        </td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.EMPAQUE}}</span></td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.PrecioVenta |number:2}}</span></td>
+                                        <td data-priority="1" class="text-right">
+                                            <span ng-if="obj.PrecioVentaNuevo!=null">{{obj.PrecioVentaNuevo |number:2}}</span>
+                                        </td>
+
+                                        <td data-priority="1" class="text-right"><span>{{obj.Total |number:2}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right" style="border-top: 1px solid grey">TOTAL</td>
+                                        <td class="text-right" style="border-top: 1px solid grey"><strong> {{objPedido.TOTAL |number:2}}</strong></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 verCelularDetallePedido" ng-repeat="obj in objPedido.Articulos">
+                        <div class="row" style="margin-bottom: 15px; width: 100%">
+                            <div class="col-sm-12 text-center" style="background-color: #8080803b;padding: 3px;">
+                                <p style="font-size: 14px;margin-bottom: 5px;">
+                                    <strong> {{obj.CODARTICULO}} - {{obj.DESCRIPCION}}</strong>
+                                </p>
+                            </div>
+                            <div class="col-sm-12 text-center" style="margin-top: 5px">
+                                <p style="margin-bottom: 5px; font-size: 13px">
+                                    <span><strong>Uni: </strong> {{obj.PrecioVenta |number:2}}</span>
+                                    <span ng-if="obj.DESCUENTOESPECIAL !=null"><strong> | % Dto: </strong> {{obj.DESCUENTOESPECIAL |number:2}}</span>
+                                    <span ng-if="obj.PrecioVentaNuevo!=null"><strong> | $ Dto: </strong>{{obj.PrecioVentaNuevo |number:2}}</span>
+                                    <span><strong> | Cant: </strong> <span style="color: red"> {{obj.CANTIDAD}} x {{obj.EMPAQUE}} </span></span>
+                                </p>
+                            </div>
+                            <div class="col-sm-12 text-center" ng-if="obj.FaltaDesde !=null">
+                                <p class="badge badge-danger" >
+                                    Falta {{obj.FaltaDesde |date:'dd/MM/yyyy'}} - {{obj.FaltaHasta |date:'dd/MM/yyyy'}}
+                                </p>
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                <span style="border: 1px solid grey; font-size: 14px; padding: 2px"><strong>Total: </strong> {{obj.Total |number:2}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-12 verCelularDetallePedido" >
+                        <div class="row" style="width: 100%">
+                            <div class="col-sm-12 text-center" style="border-top: 1px solid grey;margin-top: 17px;">
+                                <p style="font-size: 17px">TOTAL: <strong> {{objPedido.TOTAL |number:2}}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalEnviar" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Enviar Pedido</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>¿Desea enviar el pedido seleccionado?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect btn-sm" ng-click="confirmaEnviarPedido()">Confirmar</button>
+                <button type="button" class="btn btn-default waves-effect btn-sm" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalCancelar" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Cancelar Pedido</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>¿Desea cancelar el pedido seleccionado?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect btn-sm" ng-click="confirmaCancelarPedido()">Confirmar</button>
+                <button type="button" class="btn btn-default waves-effect btn-sm" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

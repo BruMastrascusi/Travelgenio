@@ -1,0 +1,200 @@
+<div class="row card-box">
+    <div class="col-sm-6">
+        <button ng-if="appRoles.isSysAdmin(true)" class="btn btn-primary btn-sm waves-effect waves-light" ng-click="AgregarGrupo()"><i class="mdi mdi-plus"></i> Catálogo</button>
+    </div>
+    <div class="col-sm-6 text-right">
+        <h4>Listado de Catálogos</h4>
+        <input type="text" ng-model="filtro" placeholder="Filtrar..." class="form-control">
+    </div>
+</div>
+
+
+
+<div class="row m-t-10 card-box">
+    <div class="col-12">
+        <div class="table-rep-plugin">
+                <div class="table-responsive table-sm " data-pattern="priority-columns">
+                    <table id="tech-companies-1" class="table  table-striped">
+                        <thead>
+                        <tr>
+                            <th data-priority="1">
+                                <span class="pointer" ng-click="orderByField='Codigo'; reverseSort = !reverseSort">Código</span>
+                                    <span ng-show="orderByField == 'Codigo'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                            </th>
+                            <th data-priority="1">
+                                <span class="pointer" ng-click="orderByField='Descripcion'; reverseSort = !reverseSort">Nombre</span>
+                                    <span ng-show="orderByField == 'Descripcion'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                            </th>
+                            <th data-priority="3" ng-show="appRoles.isSysAdmin(true)" class="text-center">
+                                <span class="pointer" ng-click="orderByField='DePlataforma'; reverseSort = !reverseSort">De Plataforma</span>
+                                    <span ng-show="orderByField == 'DePlataforma'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in lstGrupos |filter:filtro | orderBy:orderByField:reverseSort"
+                                ng-if="!obj.DePlataforma || (obj.DePlataforma && appRoles.isSysAdmin(true))">
+                            <td data-priority="1" ng-click="EditarGrupo(obj)" style="cursor: pointer;"><span>{{obj.Codigo}}</span></td>
+                            <td data-priority="1" ng-click="EditarGrupo(obj)" style="cursor: pointer;"><span>{{obj.Descripcion}}</span></td>
+                            <td data-priority="3" ng-click="EditarGrupo(obj)" class="text-center"
+                                style="cursor: pointer;" ng-if="appRoles.isSysAdmin(true)">
+                                <span ng-show="obj.DePlataforma"><i class="mdi mdi-check"></i></span>
+                            </td>
+                            <td data-priority="1" class="text-right ">
+                                <a class="btn btn-info btn-sm waves-effect waves-light"
+                                   href="" ng-click="VerItems(obj)" title="Items"><i class="fa fa-th-list"></i>
+                                </a>
+                                <a class="btn btn-danger btn-sm waves-effect waves-light" ng-if="appRoles.isSysAdmin(true)"
+                                   href="" ng-click="EliminarGrupo(obj)" title="Eliminar"><i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+<div id="modalGrupo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <form id="frmGrupo" name="frmGrupo" ng-submit="GuardarGrupo()">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" ng-show="modo == 'A'">Agregar Grupo</h4>
+                    <h4 class="modal-title" ng-show="modo == 'E'">Modificar Grupo</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="codigogrupo" class="control-label">Codigo<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="codigogrupo" name="codigogrupo" data-parsley-required
+                                       placeholder="Código" ng-model="objEditar.Codigo">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="nombre" class="control-label">Descripción<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" data-parsley-required
+                                       placeholder="Descripción" ng-model="objEditar.Descripcion">
+                            </div>
+                        </div>
+                        <div class="col-md-12" ng-if="appRoles.isSysAdmin(true)">
+                            <div class="form-group">
+                                <div class="checkbox checkbox-primary">
+                                    <input id="plataforma" type="checkbox" checked="" ng-model="objEditar.DePlataforma">
+                                    <label for="plataforma">
+                                        Plataforma
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info waves-effect waves-light" >Guardar</button>
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="modalItem" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <form id="frmItem" name="frmItem" ng-submit="GuardarItem()">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" ng-show="modo == 'A'">Agregar Item</h4>
+                    <h4 class="modal-title" ng-show="modo == 'E'">Modificar Item</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="code" class="control-label">Codigo<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="code" name="code" data-parsley-type="alphanum" required
+                                       placeholder="Código" ng-model="objEditar.Codigo">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nom" class="control-label">Nombre<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="nom" name="nom" data-parsley-type="alphanum" required
+                                       placeholder="Nombre" ng-model="objEditar.Descripcion">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info waves-effect waves-light" >Guardar</button>
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="modalEliminarGrupo" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Eliminar Grupo</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4>¿Confirma eliminar el grupo seleccionado?</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info waves-effect waves-light" ng-click="ConfirmaEliminarGrupo()">Eliminar</button>
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="modalEliminarItem" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Eliminar Item</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4>¿Confirma eliminar el item seleccionado?</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info waves-effect waves-light" ng-click="ConfirmaEliminarItem()">Eliminar</button>
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,50 @@
+
+    <header id="topnav" ng-controller="NavBarCtrl">
+
+        <header id="topnav" ng-controller="NavBarCtrl">
+
+            <div class="topbar-main">
+                <div class="container-fluid">
+
+                    <div class="logo">
+                        <a ui-sref="index.main" class="logo">
+                            <span class="logo-large">TRAVELGENIO</span>
+                        </a>
+                    </div>
+                    <div class="menu-extras topbar-custom">
+                    
+
+                        <ul class="list-inline float-right mb-0">
+                            <li class="list-inline-item dropdown notification-list  menuCel">
+                                <a class="nav-link dropdown-toggle waves-effect nav-user hidden-xl-up" data-toggle="dropdown" href="" role="button"
+                                   aria-haspopup="false" aria-expanded="false">
+                                    <i class="ti ti-menu" style="font-size: 25px"></i>
+                                </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview" style="width: auto">
+                                 <a href="" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="index.main">Home</a>
+                                <a href="" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="boleto.adminpboletos">Viajes</a>
+                                <a href="" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="reportes.boletos">Reportes</a>
+                            </div>
+                            </li>
+                        
+                        </ul>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+                </div> <!-- end container -->
+            </div>
+            <div class="navbar-custom">
+                <div class="container-fluid">
+                    <div id="navigation">
+                        <!-- Navigation Menu-->
+                        <ul class="navigation-menu">
+                            <li class="has-submenu"><a ui-sref="index.main"><i class="ti-home"></i>Home</a></li>
+                            <li class="has-submenu"><a ui-sref="boleto.adminboletos"><i class="fa fa-plane"></i>Viajes</a></li>
+                            <li class="has-submenu"><a ui-sref="reportes.boletos"><i class="ti-info-alt"></i>Reportes</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>

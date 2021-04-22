@@ -1,0 +1,722 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B4A2247A-4854-445D-B19D-C00B44055257}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Travelgenio.App</RootNamespace>
+    <AssemblyName>Travelgenio.App</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NReco.PdfGenerator, Version=1.1.15.0, Culture=neutral, PublicKeyToken=231663d50a41b451, processorArchitecture=MSIL">
+      <HintPath>..\packages\NReco.PdfGenerator.1.1.15\lib\net20\NReco.PdfGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\config\config.js" />
+    <Content Include="app\css\app.css" />
+    <Content Include="app\css\bootstrap.min.css" />
+    <Content Include="app\css\travelgenio.css" />
+    <Content Include="app\css\icons.css" />
+    <Content Include="app\css\print.css" />
+    <Content Include="app\css\style.css" />
+    <Content Include="app\img\favicon.ico" />
+    <Content Include="app\img\travelgenio\hornex_logo.jpg" />
+    <Content Include="app\js\app.js" />
+    <Content Include="app\js\config.js" />
+    <Content Include="app\js\controllers.js" />
+    <Content Include="app\js\directives.js" />
+    <Content Include="app\js\services.js" />
+    <Content Include="app\js\util.js" />
+    <Content Include="app\lib\angular-bootstrap\index.js" />
+    <Content Include="app\lib\angular-bootstrap\ui-bootstrap-csp.css" />
+    <Content Include="app\lib\angular-bootstrap\ui-bootstrap-tpls-1.1.2.min.js" />
+    <Content Include="app\lib\angular-bootstrap\ui-bootstrap-tpls.js" />
+    <Content Include="app\lib\angular-bootstrap\ui-bootstrap-tpls.min.js" />
+    <Content Include="app\lib\angular-bootstrap\ui-bootstrap.js" />
+    <Content Include="app\lib\angular-bootstrap\ui-bootstrap.min.js" />
+    <Content Include="app\lib\angular-cookies.js" />
+    <Content Include="app\lib\angular-file-upload\dist\angular-file-upload.js" />
+    <Content Include="app\lib\angular-file-upload\dist\angular-file-upload.min.js" />
+    <Content Include="app\lib\angular-file-upload\gulpfile.js" />
+    <Content Include="app\lib\angular-file-upload\license.txt" />
+    <Content Include="app\lib\angular-file-upload\WebpackConfig.js" />
+    <Content Include="app\lib\base64\angular-base64.min.js" />
+    <Content Include="app\lib\bootstrap-sweetalert\sweet-alert.css" />
+    <Content Include="app\lib\bootstrap-sweetalert\sweet-alert.js" />
+    <Content Include="app\lib\bootstrap-sweetalert\sweet-alert.min.js" />
+    <Content Include="app\lib\bootstrap-sweetalert\thumbs-up.jpg" />
+    <Content Include="app\lib\jasny-bootstrap\dist\css\jasny-bootstrap.css" />
+    <Content Include="app\lib\jasny-bootstrap\dist\css\jasny-bootstrap.min.css" />
+    <Content Include="app\lib\jasny-bootstrap\dist\js\jasny-bootstrap.js" />
+    <Content Include="app\lib\jasny-bootstrap\dist\js\jasny-bootstrap.min.js" />
+    <Content Include="app\lib\jasny-bootstrap\Gruntfile.js" />
+    <Content Include="app\lib\jasny-bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="app\lib\jasny-bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="app\lib\jasny-bootstrap\grunt\shrinkwrap.js" />
+    <Content Include="app\lib\jasny-bootstrap\js\fileinput.js" />
+    <Content Include="app\lib\jasny-bootstrap\js\inputmask.js" />
+    <Content Include="app\lib\jasny-bootstrap\js\offcanvas.js" />
+    <Content Include="app\lib\jasny-bootstrap\js\rowlink.js" />
+    <Content Include="app\lib\jasny-bootstrap\js\transition.js" />
+    <Content Include="app\lib\jasny-bootstrap\test-infra\requirements.txt" />
+    <Content Include="app\lib\js-xlsx\dist\cpexcel.js" />
+    <Content Include="app\lib\js-xlsx\dist\jszip.js" />
+    <Content Include="app\lib\js-xlsx\dist\xlsx.core.min.js" />
+    <Content Include="app\lib\js-xlsx\dist\xlsx.full.min.js" />
+    <Content Include="app\lib\js-xlsx\dist\xlsx.js" />
+    <Content Include="app\lib\js-xlsx\dist\xlsx.min.js" />
+    <Content Include="app\lib\minton\bootstrap.min.js" />
+    <Content Include="app\lib\minton\jquery.app.js" />
+    <Content Include="app\lib\minton\jquery.core.js" />
+    <Content Include="app\lib\minton\jquery.min.js" />
+    <Content Include="app\lib\minton\jquery.nicescroll.js" />
+    <Content Include="app\lib\minton\jquery.scrollTo.min.js" />
+    <Content Include="app\lib\minton\jquery.slimscroll.js" />
+    <Content Include="app\lib\minton\metisMenu.min.js" />
+    <Content Include="app\lib\minton\modernizr.min.js" />
+    <Content Include="app\lib\minton\popper.min.js" />
+    <Content Include="app\lib\minton\waves.js" />
+    <Content Include="app\lib\minton\wow.min.js" />
+    <Content Include="app\lib\angular-base64-upload\demo\angular-base64-upload.js" />
+    <Content Include="app\lib\angular-base64-upload\demo\index.html" />
+    <Content Include="app\lib\angular-base64-upload\demo\server.php" />
+    <Content Include="app\lib\angular-base64-upload\demo\uploads\index.php" />
+    <Content Include="app\lib\angular-base64-upload\dist\angular-base64-upload.js" />
+    <Content Include="app\lib\angular-base64-upload\dist\angular-base64-upload.min.js" />
+    <Content Include="app\lib\angular-base64-upload\Gruntfile.js" />
+    <Content Include="app\lib\angular-base64-upload\index.js" />
+    <Content Include="app\lib\angular-base64-upload\src\angular-base64-upload.js" />
+    <Content Include="app\lib\angular-datepicker\dist\angular-datepicker.css" />
+    <Content Include="app\lib\angular-datepicker\dist\angular-datepicker.js" />
+    <Content Include="app\lib\angular-datepicker\dist\angular-datepicker.min.css" />
+    <Content Include="app\lib\angular-datepicker\dist\angular-datepicker.min.js" />
+    <Content Include="app\lib\angular-datepicker\index.js" />
+    <Content Include="app\lib\angular-sanitize\angular-sanitize.js" />
+    <Content Include="app\lib\angular-sanitize\angular-sanitize.min.js" />
+    <Content Include="app\lib\angular-sanitize\index.js" />
+    <Content Include="app\lib\angular-ui-router\angular-ui-router.min.js" />
+    <Content Include="app\lib\angular\angular-csp.css" />
+    <Content Include="app\lib\angular\angular.js" />
+    <Content Include="app\lib\angular\angular.min.js" />
+    <Content Include="app\lib\angular\index.js" />
+    <Content Include="app\lib\downloadjs\download.js" />
+    <Content Include="app\lib\downloadjs\download.min.js" />
+    <Content Include="app\lib\jquery-circliful\css\jquery.circliful.css" />
+    <Content Include="app\lib\jquery-circliful\js\jquery.circliful.js" />
+    <Content Include="app\lib\jquery-circliful\js\jquery.circliful.min.js" />
+    <Content Include="app\lib\moment\locale\af.js" />
+    <Content Include="app\lib\moment\locale\ar-ma.js" />
+    <Content Include="app\lib\moment\locale\ar-sa.js" />
+    <Content Include="app\lib\moment\locale\ar-tn.js" />
+    <Content Include="app\lib\moment\locale\ar.js" />
+    <Content Include="app\lib\moment\locale\az.js" />
+    <Content Include="app\lib\moment\locale\be.js" />
+    <Content Include="app\lib\moment\locale\bg.js" />
+    <Content Include="app\lib\moment\locale\bn.js" />
+    <Content Include="app\lib\moment\locale\bo.js" />
+    <Content Include="app\lib\moment\locale\br.js" />
+    <Content Include="app\lib\moment\locale\bs.js" />
+    <Content Include="app\lib\moment\locale\ca.js" />
+    <Content Include="app\lib\moment\locale\cs.js" />
+    <Content Include="app\lib\moment\locale\cv.js" />
+    <Content Include="app\lib\moment\locale\cy.js" />
+    <Content Include="app\lib\moment\locale\da.js" />
+    <Content Include="app\lib\moment\locale\de-at.js" />
+    <Content Include="app\lib\moment\locale\de.js" />
+    <Content Include="app\lib\moment\locale\dv.js" />
+    <Content Include="app\lib\moment\locale\el.js" />
+    <Content Include="app\lib\moment\locale\en-au.js" />
+    <Content Include="app\lib\moment\locale\en-ca.js" />
+    <Content Include="app\lib\moment\locale\en-gb.js" />
+    <Content Include="app\lib\moment\locale\en-ie.js" />
+    <Content Include="app\lib\moment\locale\en-nz.js" />
+    <Content Include="app\lib\moment\locale\eo.js" />
+    <Content Include="app\lib\moment\locale\es.js" />
+    <Content Include="app\lib\moment\locale\et.js" />
+    <Content Include="app\lib\moment\locale\eu.js" />
+    <Content Include="app\lib\moment\locale\fa.js" />
+    <Content Include="app\lib\moment\locale\fi.js" />
+    <Content Include="app\lib\moment\locale\fo.js" />
+    <Content Include="app\lib\moment\locale\fr-ca.js" />
+    <Content Include="app\lib\moment\locale\fr-ch.js" />
+    <Content Include="app\lib\moment\locale\fr.js" />
+    <Content Include="app\lib\moment\locale\fy.js" />
+    <Content Include="app\lib\moment\locale\gd.js" />
+    <Content Include="app\lib\moment\locale\gl.js" />
+    <Content Include="app\lib\moment\locale\he.js" />
+    <Content Include="app\lib\moment\locale\hi.js" />
+    <Content Include="app\lib\moment\locale\hr.js" />
+    <Content Include="app\lib\moment\locale\hu.js" />
+    <Content Include="app\lib\moment\locale\hy-am.js" />
+    <Content Include="app\lib\moment\locale\id.js" />
+    <Content Include="app\lib\moment\locale\is.js" />
+    <Content Include="app\lib\moment\locale\it.js" />
+    <Content Include="app\lib\moment\locale\ja.js" />
+    <Content Include="app\lib\moment\locale\jv.js" />
+    <Content Include="app\lib\moment\locale\ka.js" />
+    <Content Include="app\lib\moment\locale\kk.js" />
+    <Content Include="app\lib\moment\locale\km.js" />
+    <Content Include="app\lib\moment\locale\ko.js" />
+    <Content Include="app\lib\moment\locale\lb.js" />
+    <Content Include="app\lib\moment\locale\lo.js" />
+    <Content Include="app\lib\moment\locale\lt.js" />
+    <Content Include="app\lib\moment\locale\lv.js" />
+    <Content Include="app\lib\moment\locale\me.js" />
+    <Content Include="app\lib\moment\locale\mk.js" />
+    <Content Include="app\lib\moment\locale\ml.js" />
+    <Content Include="app\lib\moment\locale\mr.js" />
+    <Content Include="app\lib\moment\locale\ms-my.js" />
+    <Content Include="app\lib\moment\locale\ms.js" />
+    <Content Include="app\lib\moment\locale\my.js" />
+    <Content Include="app\lib\moment\locale\nb.js" />
+    <Content Include="app\lib\moment\locale\ne.js" />
+    <Content Include="app\lib\moment\locale\nl.js" />
+    <Content Include="app\lib\moment\locale\nn.js" />
+    <Content Include="app\lib\moment\locale\pl.js" />
+    <Content Include="app\lib\moment\locale\pt-br.js" />
+    <Content Include="app\lib\moment\locale\pt.js" />
+    <Content Include="app\lib\moment\locale\ro.js" />
+    <Content Include="app\lib\moment\locale\ru.js" />
+    <Content Include="app\lib\moment\locale\se.js" />
+    <Content Include="app\lib\moment\locale\si.js" />
+    <Content Include="app\lib\moment\locale\sk.js" />
+    <Content Include="app\lib\moment\locale\sl.js" />
+    <Content Include="app\lib\moment\locale\sq.js" />
+    <Content Include="app\lib\moment\locale\sr-cyrl.js" />
+    <Content Include="app\lib\moment\locale\sr.js" />
+    <Content Include="app\lib\moment\locale\sv.js" />
+    <Content Include="app\lib\moment\locale\sw.js" />
+    <Content Include="app\lib\moment\locale\ta.js" />
+    <Content Include="app\lib\moment\locale\te.js" />
+    <Content Include="app\lib\moment\locale\th.js" />
+    <Content Include="app\lib\moment\locale\tl-ph.js" />
+    <Content Include="app\lib\moment\locale\tlh.js" />
+    <Content Include="app\lib\moment\locale\tr.js" />
+    <Content Include="app\lib\moment\locale\tzl.js" />
+    <Content Include="app\lib\moment\locale\tzm-latn.js" />
+    <Content Include="app\lib\moment\locale\tzm.js" />
+    <Content Include="app\lib\moment\locale\uk.js" />
+    <Content Include="app\lib\moment\locale\uz.js" />
+    <Content Include="app\lib\moment\locale\vi.js" />
+    <Content Include="app\lib\moment\locale\zh-cn.js" />
+    <Content Include="app\lib\moment\locale\zh-tw.js" />
+    <Content Include="app\lib\moment\min\locales.js" />
+    <Content Include="app\lib\moment\min\locales.min.js" />
+    <Content Include="app\lib\moment\min\moment-with-locales.js" />
+    <Content Include="app\lib\moment\min\moment-with-locales.min.js" />
+    <Content Include="app\lib\moment\min\moment.min.js" />
+    <Content Include="app\lib\moment\min\tests.js" />
+    <Content Include="app\lib\moment\moment.js" />
+    <Content Include="app\lib\moment\src\lib\create\check-overflow.js" />
+    <Content Include="app\lib\moment\src\lib\create\date-from-array.js" />
+    <Content Include="app\lib\moment\src\lib\create\from-anything.js" />
+    <Content Include="app\lib\moment\src\lib\create\from-array.js" />
+    <Content Include="app\lib\moment\src\lib\create\from-object.js" />
+    <Content Include="app\lib\moment\src\lib\create\from-string-and-array.js" />
+    <Content Include="app\lib\moment\src\lib\create\from-string-and-format.js" />
+    <Content Include="app\lib\moment\src\lib\create\from-string.js" />
+    <Content Include="app\lib\moment\src\lib\create\local.js" />
+    <Content Include="app\lib\moment\src\lib\create\parsing-flags.js" />
+    <Content Include="app\lib\moment\src\lib\create\utc.js" />
+    <Content Include="app\lib\moment\src\lib\create\valid.js" />
+    <Content Include="app\lib\moment\src\lib\duration\abs.js" />
+    <Content Include="app\lib\moment\src\lib\duration\add-subtract.js" />
+    <Content Include="app\lib\moment\src\lib\duration\as.js" />
+    <Content Include="app\lib\moment\src\lib\duration\bubble.js" />
+    <Content Include="app\lib\moment\src\lib\duration\constructor.js" />
+    <Content Include="app\lib\moment\src\lib\duration\create.js" />
+    <Content Include="app\lib\moment\src\lib\duration\duration.js" />
+    <Content Include="app\lib\moment\src\lib\duration\get.js" />
+    <Content Include="app\lib\moment\src\lib\duration\humanize.js" />
+    <Content Include="app\lib\moment\src\lib\duration\iso-string.js" />
+    <Content Include="app\lib\moment\src\lib\duration\prototype.js" />
+    <Content Include="app\lib\moment\src\lib\format\format.js" />
+    <Content Include="app\lib\moment\src\lib\locale\calendar.js" />
+    <Content Include="app\lib\moment\src\lib\locale\constructor.js" />
+    <Content Include="app\lib\moment\src\lib\locale\en.js" />
+    <Content Include="app\lib\moment\src\lib\locale\formats.js" />
+    <Content Include="app\lib\moment\src\lib\locale\invalid.js" />
+    <Content Include="app\lib\moment\src\lib\locale\lists.js" />
+    <Content Include="app\lib\moment\src\lib\locale\locale.js" />
+    <Content Include="app\lib\moment\src\lib\locale\locales.js" />
+    <Content Include="app\lib\moment\src\lib\locale\ordinal.js" />
+    <Content Include="app\lib\moment\src\lib\locale\pre-post-format.js" />
+    <Content Include="app\lib\moment\src\lib\locale\prototype.js" />
+    <Content Include="app\lib\moment\src\lib\locale\relative.js" />
+    <Content Include="app\lib\moment\src\lib\locale\set.js" />
+    <Content Include="app\lib\moment\src\lib\moment\add-subtract.js" />
+    <Content Include="app\lib\moment\src\lib\moment\calendar.js" />
+    <Content Include="app\lib\moment\src\lib\moment\clone.js" />
+    <Content Include="app\lib\moment\src\lib\moment\compare.js" />
+    <Content Include="app\lib\moment\src\lib\moment\constructor.js" />
+    <Content Include="app\lib\moment\src\lib\moment\creation-data.js" />
+    <Content Include="app\lib\moment\src\lib\moment\diff.js" />
+    <Content Include="app\lib\moment\src\lib\moment\format.js" />
+    <Content Include="app\lib\moment\src\lib\moment\from.js" />
+    <Content Include="app\lib\moment\src\lib\moment\get-set.js" />
+    <Content Include="app\lib\moment\src\lib\moment\locale.js" />
+    <Content Include="app\lib\moment\src\lib\moment\min-max.js" />
+    <Content Include="app\lib\moment\src\lib\moment\moment.js" />
+    <Content Include="app\lib\moment\src\lib\moment\now.js" />
+    <Content Include="app\lib\moment\src\lib\moment\prototype.js" />
+    <Content Include="app\lib\moment\src\lib\moment\start-end-of.js" />
+    <Content Include="app\lib\moment\src\lib\moment\to-type.js" />
+    <Content Include="app\lib\moment\src\lib\moment\to.js" />
+    <Content Include="app\lib\moment\src\lib\moment\valid.js" />
+    <Content Include="app\lib\moment\src\lib\parse\regex.js" />
+    <Content Include="app\lib\moment\src\lib\parse\token.js" />
+    <Content Include="app\lib\moment\src\lib\units\aliases.js" />
+    <Content Include="app\lib\moment\src\lib\units\constants.js" />
+    <Content Include="app\lib\moment\src\lib\units\day-of-month.js" />
+    <Content Include="app\lib\moment\src\lib\units\day-of-week.js" />
+    <Content Include="app\lib\moment\src\lib\units\day-of-year.js" />
+    <Content Include="app\lib\moment\src\lib\units\hour.js" />
+    <Content Include="app\lib\moment\src\lib\units\millisecond.js" />
+    <Content Include="app\lib\moment\src\lib\units\minute.js" />
+    <Content Include="app\lib\moment\src\lib\units\month.js" />
+    <Content Include="app\lib\moment\src\lib\units\offset.js" />
+    <Content Include="app\lib\moment\src\lib\units\quarter.js" />
+    <Content Include="app\lib\moment\src\lib\units\second.js" />
+    <Content Include="app\lib\moment\src\lib\units\timestamp.js" />
+    <Content Include="app\lib\moment\src\lib\units\timezone.js" />
+    <Content Include="app\lib\moment\src\lib\units\units.js" />
+    <Content Include="app\lib\moment\src\lib\units\week-calendar-utils.js" />
+    <Content Include="app\lib\moment\src\lib\units\week-year.js" />
+    <Content Include="app\lib\moment\src\lib\units\week.js" />
+    <Content Include="app\lib\moment\src\lib\units\year.js" />
+    <Content Include="app\lib\moment\src\lib\utils\abs-ceil.js" />
+    <Content Include="app\lib\moment\src\lib\utils\abs-floor.js" />
+    <Content Include="app\lib\moment\src\lib\utils\compare-arrays.js" />
+    <Content Include="app\lib\moment\src\lib\utils\defaults.js" />
+    <Content Include="app\lib\moment\src\lib\utils\deprecate.js" />
+    <Content Include="app\lib\moment\src\lib\utils\extend.js" />
+    <Content Include="app\lib\moment\src\lib\utils\has-own-prop.js" />
+    <Content Include="app\lib\moment\src\lib\utils\hooks.js" />
+    <Content Include="app\lib\moment\src\lib\utils\is-array.js" />
+    <Content Include="app\lib\moment\src\lib\utils\is-date.js" />
+    <Content Include="app\lib\moment\src\lib\utils\is-function.js" />
+    <Content Include="app\lib\moment\src\lib\utils\is-undefined.js" />
+    <Content Include="app\lib\moment\src\lib\utils\map.js" />
+    <Content Include="app\lib\moment\src\lib\utils\to-int.js" />
+    <Content Include="app\lib\moment\src\lib\utils\zero-fill.js" />
+    <Content Include="app\lib\moment\src\locale\af.js" />
+    <Content Include="app\lib\moment\src\locale\ar-ma.js" />
+    <Content Include="app\lib\moment\src\locale\ar-sa.js" />
+    <Content Include="app\lib\moment\src\locale\ar-tn.js" />
+    <Content Include="app\lib\moment\src\locale\ar.js" />
+    <Content Include="app\lib\moment\src\locale\az.js" />
+    <Content Include="app\lib\moment\src\locale\be.js" />
+    <Content Include="app\lib\moment\src\locale\bg.js" />
+    <Content Include="app\lib\moment\src\locale\bn.js" />
+    <Content Include="app\lib\moment\src\locale\bo.js" />
+    <Content Include="app\lib\moment\src\locale\br.js" />
+    <Content Include="app\lib\moment\src\locale\bs.js" />
+    <Content Include="app\lib\moment\src\locale\ca.js" />
+    <Content Include="app\lib\moment\src\locale\cs.js" />
+    <Content Include="app\lib\moment\src\locale\cv.js" />
+    <Content Include="app\lib\moment\src\locale\cy.js" />
+    <Content Include="app\lib\moment\src\locale\da.js" />
+    <Content Include="app\lib\moment\src\locale\de-at.js" />
+    <Content Include="app\lib\moment\src\locale\de.js" />
+    <Content Include="app\lib\moment\src\locale\dv.js" />
+    <Content Include="app\lib\moment\src\locale\el.js" />
+    <Content Include="app\lib\moment\src\locale\en-au.js" />
+    <Content Include="app\lib\moment\src\locale\en-ca.js" />
+    <Content Include="app\lib\moment\src\locale\en-gb.js" />
+    <Content Include="app\lib\moment\src\locale\en-ie.js" />
+    <Content Include="app\lib\moment\src\locale\en-nz.js" />
+    <Content Include="app\lib\moment\src\locale\eo.js" />
+    <Content Include="app\lib\moment\src\locale\es.js" />
+    <Content Include="app\lib\moment\src\locale\et.js" />
+    <Content Include="app\lib\moment\src\locale\eu.js" />
+    <Content Include="app\lib\moment\src\locale\fa.js" />
+    <Content Include="app\lib\moment\src\locale\fi.js" />
+    <Content Include="app\lib\moment\src\locale\fo.js" />
+    <Content Include="app\lib\moment\src\locale\fr-ca.js" />
+    <Content Include="app\lib\moment\src\locale\fr-ch.js" />
+    <Content Include="app\lib\moment\src\locale\fr.js" />
+    <Content Include="app\lib\moment\src\locale\fy.js" />
+    <Content Include="app\lib\moment\src\locale\gd.js" />
+    <Content Include="app\lib\moment\src\locale\gl.js" />
+    <Content Include="app\lib\moment\src\locale\he.js" />
+    <Content Include="app\lib\moment\src\locale\hi.js" />
+    <Content Include="app\lib\moment\src\locale\hr.js" />
+    <Content Include="app\lib\moment\src\locale\hu.js" />
+    <Content Include="app\lib\moment\src\locale\hy-am.js" />
+    <Content Include="app\lib\moment\src\locale\id.js" />
+    <Content Include="app\lib\moment\src\locale\is.js" />
+    <Content Include="app\lib\moment\src\locale\it.js" />
+    <Content Include="app\lib\moment\src\locale\ja.js" />
+    <Content Include="app\lib\moment\src\locale\jv.js" />
+    <Content Include="app\lib\moment\src\locale\ka.js" />
+    <Content Include="app\lib\moment\src\locale\kk.js" />
+    <Content Include="app\lib\moment\src\locale\km.js" />
+    <Content Include="app\lib\moment\src\locale\ko.js" />
+    <Content Include="app\lib\moment\src\locale\lb.js" />
+    <Content Include="app\lib\moment\src\locale\lo.js" />
+    <Content Include="app\lib\moment\src\locale\lt.js" />
+    <Content Include="app\lib\moment\src\locale\lv.js" />
+    <Content Include="app\lib\moment\src\locale\me.js" />
+    <Content Include="app\lib\moment\src\locale\mk.js" />
+    <Content Include="app\lib\moment\src\locale\ml.js" />
+    <Content Include="app\lib\moment\src\locale\mr.js" />
+    <Content Include="app\lib\moment\src\locale\ms-my.js" />
+    <Content Include="app\lib\moment\src\locale\ms.js" />
+    <Content Include="app\lib\moment\src\locale\my.js" />
+    <Content Include="app\lib\moment\src\locale\nb.js" />
+    <Content Include="app\lib\moment\src\locale\ne.js" />
+    <Content Include="app\lib\moment\src\locale\nl.js" />
+    <Content Include="app\lib\moment\src\locale\nn.js" />
+    <Content Include="app\lib\moment\src\locale\pl.js" />
+    <Content Include="app\lib\moment\src\locale\pt-br.js" />
+    <Content Include="app\lib\moment\src\locale\pt.js" />
+    <Content Include="app\lib\moment\src\locale\ro.js" />
+    <Content Include="app\lib\moment\src\locale\ru.js" />
+    <Content Include="app\lib\moment\src\locale\se.js" />
+    <Content Include="app\lib\moment\src\locale\si.js" />
+    <Content Include="app\lib\moment\src\locale\sk.js" />
+    <Content Include="app\lib\moment\src\locale\sl.js" />
+    <Content Include="app\lib\moment\src\locale\sq.js" />
+    <Content Include="app\lib\moment\src\locale\sr-cyrl.js" />
+    <Content Include="app\lib\moment\src\locale\sr.js" />
+    <Content Include="app\lib\moment\src\locale\sv.js" />
+    <Content Include="app\lib\moment\src\locale\sw.js" />
+    <Content Include="app\lib\moment\src\locale\ta.js" />
+    <Content Include="app\lib\moment\src\locale\te.js" />
+    <Content Include="app\lib\moment\src\locale\th.js" />
+    <Content Include="app\lib\moment\src\locale\tl-ph.js" />
+    <Content Include="app\lib\moment\src\locale\tlh.js" />
+    <Content Include="app\lib\moment\src\locale\tr.js" />
+    <Content Include="app\lib\moment\src\locale\tzl.js" />
+    <Content Include="app\lib\moment\src\locale\tzm-latn.js" />
+    <Content Include="app\lib\moment\src\locale\tzm.js" />
+    <Content Include="app\lib\moment\src\locale\uk.js" />
+    <Content Include="app\lib\moment\src\locale\uz.js" />
+    <Content Include="app\lib\moment\src\locale\vi.js" />
+    <Content Include="app\lib\moment\src\locale\zh-cn.js" />
+    <Content Include="app\lib\moment\src\locale\zh-tw.js" />
+    <Content Include="app\lib\moment\src\moment.js" />
+    <Content Include="app\lib\moment\templates\amd-named.js" />
+    <Content Include="app\lib\moment\templates\amd.js" />
+    <Content Include="app\lib\moment\templates\default.js" />
+    <Content Include="app\lib\moment\templates\globals.js" />
+    <Content Include="app\lib\moment\templates\locale-header.js" />
+    <Content Include="app\lib\moment\templates\test-header.js" />
+    <Content Include="app\lib\notifications\notification.css" />
+    <Content Include="app\lib\notifications\notify-metro.js" />
+    <Content Include="app\lib\notifyjs\dist\notify-combined.js" />
+    <Content Include="app\lib\notifyjs\dist\notify-combined.min.js" />
+    <Content Include="app\lib\notifyjs\dist\notify.js" />
+    <Content Include="app\lib\notifyjs\dist\notify.min.js" />
+    <Content Include="app\lib\notifyjs\dist\styles\bootstrap\notify-bootstrap.js" />
+    <Content Include="app\lib\notifyjs\dist\styles\metro\notify-metro.css" />
+    <Content Include="app\lib\notifyjs\dist\styles\metro\notify-metro.js" />
+    <Content Include="app\lib\oclazyload\dist\modules\ocLazyLoad.core.js" />
+    <Content Include="app\lib\oclazyload\dist\modules\ocLazyLoad.directive.js" />
+    <Content Include="app\lib\oclazyload\dist\modules\ocLazyLoad.loaders.common.js" />
+    <Content Include="app\lib\oclazyload\dist\modules\ocLazyLoad.loaders.core.js" />
+    <Content Include="app\lib\oclazyload\dist\modules\ocLazyLoad.loaders.cssLoader.js" />
+    <Content Include="app\lib\oclazyload\dist\modules\ocLazyLoad.loaders.jsLoader.js" />
+    <Content Include="app\lib\oclazyload\dist\modules\ocLazyLoad.loaders.requireJSLoader.js" />
+    <Content Include="app\lib\oclazyload\dist\modules\ocLazyLoad.loaders.templatesLoader.js" />
+    <Content Include="app\lib\oclazyload\dist\modules\ocLazyLoad.polyfill.ie8.js" />
+    <Content Include="app\lib\oclazyload\dist\ocLazyLoad.js" />
+    <Content Include="app\lib\oclazyload\dist\ocLazyLoad.min.js" />
+    <Content Include="app\lib\oclazyload\dist\ocLazyLoad.require.js" />
+    <Content Include="app\lib\oclazyload\dist\ocLazyLoad.require.min.js" />
+    <Content Include="app\lib\orgChart\css\jquery.orgchart.min.css" />
+    <Content Include="app\lib\orgChart\js\jquery.orgchart.min.js" />
+    <Content Include="app\lib\parsleyjs\dist\i18n\es.js" />
+    <Content Include="app\lib\parsleyjs\dist\parsley.js" />
+    <Content Include="app\lib\parsleyjs\dist\parsley.min.js" />
+    <Content Include="app\lib\RWD-Table-Patterns\dist\css\rwd-table.css" />
+    <Content Include="app\lib\RWD-Table-Patterns\dist\css\rwd-table.min.css" />
+    <Content Include="app\lib\RWD-Table-Patterns\dist\js\rwd-table.js" />
+    <Content Include="app\lib\RWD-Table-Patterns\dist\js\rwd-table.min.js" />
+    <Content Include="app\lib\RWD-Table-Patterns\src\js\rwd-table.js" />
+    <Content Include="app\lib\ui-cropper\compile\minified\ui-cropper.css" />
+    <Content Include="app\lib\ui-cropper\compile\minified\ui-cropper.js" />
+    <Content Include="app\lib\ui-cropper\compile\unminified\ui-cropper.css" />
+    <Content Include="app\lib\ui-cropper\compile\unminified\ui-cropper.js" />
+    <Content Include="app\lib\underscore\underscore-min.js" />
+    <Content Include="app\lib\underscore\underscore.js" />
+    <Content Include="app\modules\reportes\views\content.html" />
+    <Content Include="app\modules\travelgenio\js\controladora.js" />
+    <Content Include="app\modules\travelgenio\js\travelgenio-services.js" />
+    <Content Include="app\modules\travelgenio\views\boletos.html" />
+    <Content Include="app\modules\reportes\js\reportes-controllers.js" />
+    <Content Include="app\modules\reportes\views\rptBoletos.html" />
+    <Content Include="app\modules\reportes\views\rptBoletosEdit.html" />
+    <Content Include="app\modules\travelgenio\views\content.html" />
+    <Content Include="app\views\common\content.html" />
+    <Content Include="app\views\common\footer.html" />
+    <Content Include="app\views\common\home.html" />
+    <Content Include="app\index.html" />
+    <Content Include="app\views\common\navbar.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="app\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="app\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="app\fonts\themify.ttf" />
+    <Content Include="app\fonts\themify.woff" />
+    <Content Include="app\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="app\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="app\fonts\weathericons-regular-webfont.woff2" />
+    <Content Include="app\lib\angular-base64-upload\.bower.json" />
+    <Content Include="app\lib\angular-base64-upload\bower.json" />
+    <Content Include="app\lib\angular-base64-upload\CHANGELOG.md" />
+    <Content Include="app\lib\angular-base64-upload\demo\README.md" />
+    <Content Include="app\lib\angular-base64-upload\dist\angular-base64-upload.min.js.map" />
+    <Content Include="app\lib\angular-base64-upload\package.json" />
+    <Content Include="app\lib\angular-base64-upload\README.md" />
+    <Content Include="app\lib\angular-datepicker\.bower.json" />
+    <Content Include="app\lib\angular-datepicker\.bowerrc" />
+    <Content Include="app\lib\angular-datepicker\.gitattributes" />
+    <Content Include="app\lib\angular-datepicker\bower.json" />
+    <Content Include="app\lib\angular-datepicker\LICENSE" />
+    <Content Include="app\lib\angular-sanitize\.bower.json" />
+    <Content Include="app\lib\angular-sanitize\angular-sanitize.min.js.map" />
+    <Content Include="app\lib\angular-sanitize\bower.json" />
+    <Content Include="app\lib\angular-sanitize\LICENSE.md" />
+    <Content Include="app\lib\angular-sanitize\package.json" />
+    <Content Include="app\lib\angular-sanitize\README.md" />
+    <Content Include="app\lib\angular\.bower.json" />
+    <Content Include="app\lib\angular\angular.min.js.gzip" />
+    <Content Include="app\lib\angular\angular.min.js.map" />
+    <Content Include="app\lib\angular\bower.json" />
+    <Content Include="app\lib\angular\LICENSE.md" />
+    <Content Include="app\lib\angular\package.json" />
+    <Content Include="app\lib\angular\README.md" />
+    <Content Include="app\lib\downloadjs\.bower.json" />
+    <Content Include="app\lib\downloadjs\bower.json" />
+    <Content Include="app\lib\downloadjs\LICENSE" />
+    <Content Include="app\lib\downloadjs\package.json" />
+    <Content Include="app\lib\downloadjs\README.md" />
+    <Content Include="app\lib\moment\.bower.json" />
+    <Content Include="app\lib\moment\bower.json" />
+    <Content Include="app\lib\moment\CHANGELOG.md" />
+    <Content Include="app\lib\moment\LICENSE" />
+    <Content Include="app\lib\moment\README.md" />
+    <Content Include="app\lib\oclazyload\.bower.json" />
+    <Content Include="app\lib\oclazyload\bower.json" />
+    <Content Include="app\lib\oclazyload\CHANGELOG.md" />
+    <Content Include="app\lib\oclazyload\LICENSE.md" />
+    <Content Include="app\lib\oclazyload\README.md" />
+    <Content Include="app\lib\RWD-Table-Patterns\src\less\rwd-table.less" />
+    <Content Include="app\fonts\fontawesome-webfont.ttf" />
+    <Content Include="app\fonts\fontawesome-webfont.woff" />
+    <Content Include="app\fonts\fontawesome-webfont.woff2" />
+    <Content Include="app\lib\angular-bootstrap\.bower.json" />
+    <Content Include="app\lib\angular-bootstrap\.gitignore" />
+    <Content Include="app\lib\angular-bootstrap\.npmignore" />
+    <Content Include="app\lib\angular-bootstrap\bower.json" />
+    <Content Include="app\lib\angular-bootstrap\package.json" />
+    <Content Include="app\lib\angular-bootstrap\README.md" />
+    <Content Include="app\lib\parsleyjs\dist\parsley.js.map" />
+    <Content Include="app\lib\parsleyjs\dist\parsley.min.js.map" />
+    <Content Include="app\lib\angular-file-upload\.bower.json" />
+    <Content Include="app\lib\angular-file-upload\.gitignore" />
+    <Content Include="app\lib\angular-file-upload\.jshintrc" />
+    <Content Include="app\lib\angular-file-upload\bower.json" />
+    <Content Include="app\lib\angular-file-upload\dist\angular-file-upload.js.map" />
+    <Content Include="app\lib\angular-file-upload\dist\angular-file-upload.min.js.map" />
+    <Content Include="app\lib\angular-file-upload\package.json" />
+    <Content Include="app\lib\angular-file-upload\README.md" />
+    <Content Include="app\lib\jasny-bootstrap\.bower.json" />
+    <Content Include="app\lib\jasny-bootstrap\bower.json" />
+    <Content Include="app\lib\jasny-bootstrap\dist\css\jasny-bootstrap.css.map" />
+    <Content Include="app\lib\jasny-bootstrap\less\alerts-fixed.less" />
+    <Content Include="app\lib\jasny-bootstrap\less\button-labels.less" />
+    <Content Include="app\lib\jasny-bootstrap\less\fileinput.less" />
+    <Content Include="app\lib\jasny-bootstrap\less\grid-container-smooth.less" />
+    <Content Include="app\lib\jasny-bootstrap\less\jasny-bootstrap.less" />
+    <Content Include="app\lib\jasny-bootstrap\less\nav-tab-alignment.less" />
+    <Content Include="app\lib\jasny-bootstrap\less\navmenu.less" />
+    <Content Include="app\lib\jasny-bootstrap\less\offcanvas.less" />
+    <Content Include="app\lib\jasny-bootstrap\less\rowlink.less" />
+    <Content Include="app\lib\jasny-bootstrap\less\variables.less" />
+    <Content Include="app\lib\jasny-bootstrap\LICENSE" />
+    <Content Include="app\lib\jasny-bootstrap\package.json" />
+    <Content Include="app\lib\jasny-bootstrap\README.md" />
+    <Content Include="app\lib\jasny-bootstrap\scss\jasny-bootstrap.scss" />
+    <Content Include="app\lib\jasny-bootstrap\scss\_alerts-fixed.scss" />
+    <Content Include="app\lib\jasny-bootstrap\scss\_button-labels.scss" />
+    <Content Include="app\lib\jasny-bootstrap\scss\_fileinput.scss" />
+    <Content Include="app\lib\jasny-bootstrap\scss\_grid-container-smooth.scss" />
+    <Content Include="app\lib\jasny-bootstrap\scss\_nav-tab-alignment.scss" />
+    <Content Include="app\lib\jasny-bootstrap\scss\_navmenu.scss" />
+    <Content Include="app\lib\jasny-bootstrap\scss\_offcanvas.scss" />
+    <Content Include="app\lib\jasny-bootstrap\scss\_rowlink.scss" />
+    <Content Include="app\lib\jasny-bootstrap\scss\_variables.scss" />
+    <Content Include="app\lib\jasny-bootstrap\test-infra\npm-shrinkwrap.canonical.json" />
+    <Content Include="app\lib\jasny-bootstrap\test-infra\README.md" />
+    <Content Include="app\lib\jasny-bootstrap\test-infra\s3_cache.py" />
+    <Content Include="app\lib\jasny-bootstrap\test-infra\sauce_browsers.yml" />
+    <Content Include="app\lib\jasny-bootstrap\test-infra\uncached-npm-install.sh" />
+    <Content Include="app\lib\underscore\.bower.json" />
+    <Content Include="app\lib\underscore\bower.json" />
+    <Content Include="app\lib\underscore\LICENSE" />
+    <Content Include="app\lib\underscore\README.md" />
+    <Content Include="app\lib\underscore\underscore-min.map" />
+    <Content Include="app\js\web.config" />
+    <Content Include="app\lib\ui-cropper\LICENSE" />
+    <Content Include="app\lib\js-xlsx\dist\LICENSE" />
+    <Content Include="app\lib\js-xlsx\dist\xlsx.core.min.map" />
+    <Content Include="app\lib\js-xlsx\dist\xlsx.full.min.map" />
+    <Content Include="app\lib\js-xlsx\dist\xlsx.min.map" />
+    <None Include="Properties\PublishProfiles\Deploys JC.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2587</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2588</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

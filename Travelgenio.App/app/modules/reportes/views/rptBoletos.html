@@ -1,0 +1,148 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $('form').parsley();
+    });
+</script>
+
+
+<div class="row card-box">
+    <div class="col-sm-6 rightAlignSm">
+        <h4>Listado de Boletos</h4>
+        <input type="text" ng-model="filtro" placeholder="Filtrar..." class="form-control">
+    </div>
+</div>
+
+
+
+<div class="row m-t-10 card-box">
+    <div class="col-12">
+        <div class="">
+            <div class="table-rep-plugin">
+                <div class="table-responsive table-sm " data-pattern="priority-columns">
+                    <table id="tech-companies-1" class="table  table-striped">
+                        <thead>
+                            <tr>
+                                <th data-priority="1" ng-hide="true">
+                                    <span class="pointer" ng-click="orderByField='CodigoBoleto'; reverseSort = !reverseSort">Boleto</span>
+                                    <span ng-show="orderByField == 'CodigoBoleto'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="3">
+                                    <span class="pointer" ng-click="orderByField='NombrePasajero'; reverseSort = !reverseSort">Nombre Pasajero</span>
+                                    <span ng-show="orderByField == 'NombrePasajero'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="1">
+                                    <span class="pointer" ng-click="orderByField='Pasaporte'; reverseSort = !reverseSort">Pasaporte</span>
+                                    <span ng-show="orderByField == 'Pasaporte'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="3">
+                                    <span class="pointer" ng-click="orderByField='Email'; reverseSort = !reverseSort">Email</span>
+                                    <span ng-show="orderByField == 'Email'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="1">
+                                    <span class="pointer" ng-click="orderByField='AeropuertoOrigen'; reverseSort = !reverseSort">Aeropuerto Origen</span>
+                                    <span ng-show="orderByField == 'Activo'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="3">
+                                    <span class="pointer" ng-click="orderByField='FechaSalida'; reverseSort = !reverseSort">Fecha de Salida</span>
+                                    <span ng-show="orderByField == 'FechaSalida'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="1">
+                                    <span class="pointer" ng-click="orderByField='AeropuertoDestino'; reverseSort = !reverseSort">Aeropuerto Destino</span>
+                                    <span ng-show="orderByField == 'AeropuertoDestino'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="3">
+                                    <span class="pointer" ng-click="orderByField='FechaLlegada'; reverseSort = !reverseSort">Fecha de Llegada</span>
+                                    <span ng-show="orderByField == 'FechaLlegada'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="1">
+                                    <span class="pointer" ng-click="orderByField='TipoDeVuelo'; reverseSort = !reverseSort">Tipo de Vuelo</span>
+                                    <span ng-show="orderByField == 'TipoDeVuelo'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                      
+                                    </span>
+                                </th>
+                                <th class="text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in lstBoletos |filter:filtro | orderBy:orderByField:reverseSort">
+                                <td data-priority="1" ng-hide="true" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.CodigoBoleto}}</span></td>
+                                <td data-priority="1" ng-hide="true" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.CodigoAeropuertoOrigen}}</span></td>
+                                <td data-priority="1" ng-hide="true" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.CodigoAeropuertoDestino}}</span></td>
+                                <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.NombrePasajero}}</span></td>
+                                <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.Pasaporte}}</span></td>
+                                <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.Email}}</span></td>
+                                <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.AeropuertoOrigen}}</span></td>
+                                <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.FechaSalida |date:'dd/MM/yyyy'}}</span></td>
+                                <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.AeropuertoDestino}}</span></td>
+                                <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.FechaLlegada |date:'dd/MM/yyyy'}}</span></td>
+                                <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;">
+                                    <span ng-show={{obj.TipoDeVuelo==0}} class="badge badge-warning">Ida</span>
+                                    <span ng-show={{obj.TipoDeVuelo==1}} class="badge badge-primary">Vuelta</span>
+                                </td>
+
+                                <td data-priority="1" class="text-right ">
+                                    <a class="btn btn-danger"
+                                       href="" ng-click="EliminarBoleto(obj)" title="Eliminar">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalEliminarBoleto" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Eliminar Boleto</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>¿Confirma eliminar el boleto seleccionado? </p>
+                        <p> Se eliminaran los tramos del boletos !!!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary waves-effect waves-light" ng-click="ConfirmaEliminarBoleto()">Eliminar</button>
+                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+ 

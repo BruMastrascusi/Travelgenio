@@ -1,0 +1,155 @@
+<form id="frmBuscarVUelos" name="frmBuscarVUelos">
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <i class="fa fa-plane"></i>Vuelos
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="rol" class="control-label">Seleccione tipo de vuelo:</label>
+                <select class="form-control" id="rol"
+                        ng-model="obj.TipoViaje"
+                        ng-options="obj.id as obj.nombre for obj in lstTipoViaje" data-parsley-required>
+                    <option value="">Seleccione...</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="">
+                <label for="conc" class="control-label">Aeropuerto Origen</label>
+                <input type="text" ng-model="objAero.AeropuertoOrigen"
+                       autocomplete="off" onclick="this.select()"
+                       typeahead-on-select="setAeropuertoOrigen($item)"
+                       placeholder="Buscar.."
+                       uib-typeahead="e.NombreAeropuerto for e in getAeropuertosOrigen($viewValue)"
+                       class="form-control"
+                       typeahead-wait-ms="250"
+                       typeahead-loading="loadingLocationsArt" autocomplete="on"
+                       typeahead-no-results="noResultsIda" typeahead-append-to-body="true"
+                       data-parsley-required="">
+                <i ng-show="loadingLocationsArt" class="fa fa-loading"></i>
+                <span class="themesecondary" ng-show="noResultsIda">
+                    <i class="fa fa-exclamation-triangle "></i> Despues de la tercer letra se mostraran los resultados.
+                </span>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="">
+                <label for="conc" class="control-label">Aeropuerto Destino</label>
+                <input type="text" ng-model="objAero.AeropuertoDestino"
+                       autocomplete="off" onclick="this.select()"
+                       typeahead-on-select="setAeropuertoDestino($item)"
+                       placeholder="Buscar.."
+                       uib-typeahead="e.NombreAeropuerto for e in getAeropuertosOrigen($viewValue)"
+                       class="form-control"
+                       typeahead-wait-ms="250"
+                       typeahead-loading="loadingLocationsArt" autocomplete="on"
+                       typeahead-no-results="noResultsOrigen" typeahead-append-to-body="true"
+                       data-parsley-required>
+                <i ng-show="loadingLocationsArt" class="fa fa-loading"></i>
+                <span class="themesecondary" ng-show="noResultsOrigen">
+                    <i class="fa fa-exclamation-triangle "></i> Despues de la tercer letra se mostraran los resultados.
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="fechad" class="control-label">Fecha Desde <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" id="fechad" name="fechad" data-parsley-required
+                       ng-model="objBoleto.FechaDesde">
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="fechah" class="control-label">Fecha Hasta <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" id="fechah" name="fechah" data-parsley-required
+                       ng-model="objBoleto.FechaHasta">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn btn-info"
+                    ng-click="buscarVuelos()" style="margin-bottom: 5px">
+                Buscar
+            </button>
+        </div>
+    </div>
+
+
+</form>
+<form id="frmBuscar" name="frmBuscar">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group" ng-show="MostrarIdaVuelta || MostrarIda">
+                <label for="rol" class="control-label">Vuelo Ida<span class="text-danger">*</span></label>
+                <select class="form-control" id="rol"
+                        ng-model="objBoleto.CodigoVueloIda" data-parsley-required
+                        ng-options="obj.CodigoVuelo as obj.DatosGenerales for obj in lstVueloIda">
+                    <option value="">Seleccione...</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group" ng-show="MostrarIdaVuelta">
+                <label for="rol" class="control-label">Vuelo Vuelta<span class="text-danger">*</span></label>
+                <select class="form-control" id="rol"
+                        ng-model="objBoleto.CodigoVueloVuelta" data-parsley-required
+                        ng-options="obj.CodigoVuelo as obj.DatosGenerales for obj in lstVueloVuelta">
+                    <option value="">Seleccione...</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr ng-show="MostrarIdaVuelta || MostrarIda" />
+    <div class="row" ng-show="MostrarIdaVuelta || MostrarIda">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Nombre Pasajero<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Nombre Pasajero"
+                           ng-model="objBoleto.NombrePasajero" data-parsley-required="">
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="form-group">
+                    <label class="control-label">Pasaporte<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Pasaporte"
+                           ng-model="objBoleto.Pasaporte" data-parsley-required="">
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="form-group">
+                    <label class="control-label">Email<span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" id="apellido" placeholder="Email"
+                           ng-model="objBoleto.Email" data-parsley-required="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Fecha Nacimiento<span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" placeholder="Fecha Nacimiento"
+                           ng-model="objBoleto.FechaNacimiento" data-parsley-required="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" ng-show="MostrarIdaVuelta || MostrarIda">
+            <button class="btn btn-info"
+                    ng-click="guardarBoleto()" style="margin-bottom: 5px">
+                Enviar
+            </button>
+        </div>
+    </div>
+</form>

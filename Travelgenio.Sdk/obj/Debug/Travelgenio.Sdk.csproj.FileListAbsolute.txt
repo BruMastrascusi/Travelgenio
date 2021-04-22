@@ -1,0 +1,5 @@
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.Sdk\bin\Debug\Travelgenio.Sdk.dll
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.Sdk\bin\Debug\Travelgenio.Sdk.pdb
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.Sdk\obj\Debug\Travelgenio.Sdk.csproj.CoreCompileInputs.cache
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.Sdk\obj\Debug\Travelgenio.Sdk.dll
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.Sdk\obj\Debug\Travelgenio.Sdk.pdb

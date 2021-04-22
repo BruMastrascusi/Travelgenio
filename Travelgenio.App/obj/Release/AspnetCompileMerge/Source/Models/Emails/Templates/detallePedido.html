@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+        .body {
+            font-family: Arial;
+        }
+        p {
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+
+       
+
+       
+    </style>
+
+</head>
+<body>
+    <div style="background: #fff; padding:20px">
+        <p>Pedido: {Id}</p>
+        <p>Cliente: {Cliente}</p>
+        <p>Fecha: {Fecha}</p>
+        <p>Orden de Compra: {OrdenCompra}</p>
+        <table style="width:100%; margin-top:20px">
+            <tbody>
+                <tr style="background-color:grey; color:white">
+                    <th style="text-align:center; padding:3px">#</th>
+                    <th style="text-align:left; padding:3px">Artículo</th>
+                    <th style="text-align:right; padding:3px">$ Unidad</th>
+                    <th style="text-align:right; padding:3px">% Dto</th>
+                    <th style="text-align:right; padding:3px">$ Dto</th>
+                    <th style="text-align:right; padding:3px">Cantidad</th>
+                    <th style="text-align:right; padding:3px">Total</th>
+                </tr>
+                
+                {Contenido}
+                
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align:right; border-top: 1px solid grey">Total</td>
+                    <td style="text-align:right; border-top: 1px solid grey">{ImporteTotal}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+</html>

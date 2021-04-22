@@ -1,0 +1,123 @@
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-controller="NavBarCtrl">
+    <div class="container">
+      <a class="navbar-brand" href="" ui-sref="index.main">Hornex</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones" aria-controls="opciones" 
+      aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="opciones">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" ng-if="appRoles.isUser(true)"><a href="" class="nav-link white">Clientes</a></li>
+          <li class="nav-item" ng-if="appRoles.isUser(true)"><a href="" class="nav-link white">Pedidos</a></li>
+          <li class="nav-item" ng-if="appRoles.isSysAdmin(true)"><a href="" class="nav-link white">Clientes</a></li>
+          <li class="nav-item" ng-if="appRoles.isSysAdmin(true)"><a href="" class="nav-link white">Pedidos</a></li>
+          <li class="nav-item" ng-if="appRoles.isSysAdmin(true)"><a href="" class="nav-link white" ui-sref="security.usuarios">Usuarios</a></li>
+          <li class="nav-item">
+            <a href="" class="nav-link white" ng-click="logout()">
+                <i class="mdi mdi-logout"></i> 
+            </a>
+          </li>
+
+        
+        </ul>
+      </div>
+    </div>
+    
+</nav>-->
+<header id="topnav" ng-controller="NavBarCtrl">
+
+    <div class="topbar-main">
+        <div class="container-fluid">
+
+            <div class="logo">
+                <a ui-sref="index.main" class="logo">
+                    <span class="logo-large">Hornex <span style="font-size: 14px">- {{appRoles.getRolDescri()}}</span></span>
+                </a>
+            </div>
+            <div class="menu-extras topbar-custom">
+                <div class="pull-left d-md-none" style="margin-top: 10px" ng-show="$state.current.data.ShowBackButton">
+                    <button class="btn btn-primary waves-effect waves-light" ng-click="Volver()"> Volver</button>
+                </div>
+
+                <ul class="list-inline float-right mb-0">
+                    <li class="list-inline-item dropdown notification-list  menuCel">
+                        <a class="nav-link dropdown-toggle waves-effect nav-user hidden-xl-up" data-toggle="dropdown" href="" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <i class="ti ti-menu" style="font-size: 25px"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview" style="width: auto">
+                            <a href="" class="dropdown-item notify-item menuLink" ui-sref="index.main"> Home</a>
+                            <a href="" ng-if="appRoles.isVendedor(true)" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="hornex.dummyprodfaltantes">Productos Faltantes</a>
+                            <a href="" ng-if="appRoles.isVendedor(true)" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="hornex.vendpedidos">Pedidos</a>
+
+                            <a href="" ng-if="appRoles.isDistribuidor(true)" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="hornex.distpedidos">Pedidos</a>
+                            <a href="" ng-if="appRoles.isAdministracion(true)" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="hornex.administracionpedidos">Pedidos</a>
+                            <a href="" ng-if="appRoles.isAdministracion(true)" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="hornex.dummyprodfaltantes">Productos Faltantes</a>
+
+                            <a href="" ng-if="appRoles.isSysAdmin(true)" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="hornex.adminpedidos">Pedidos</a>
+                            <a href="" ng-if="appRoles.isSysAdmin(true)" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="hornex.prodfaltantes">Productos Faltantes</a>
+                            <a href="" ng-if="appRoles.isSysAdmin(true)" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="security.usuarios">Usuarios</a>
+
+                            <a href="" ng-if="appRoles.isAuxDepo(true)" class="dropdown-item notify-item menuLink" ui-sref-opts="{reload: true}" ui-sref="hornex.prodfaltantes">Productos Faltantes</a>
+                        </div>
+                    </li>
+                    <li class="list-inline-item dropdown notification-list">
+                        <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <img src="{{appSession.currentUser.Empleo.Persona.Foto}}" alt="user" class="rounded-circle">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5 class="text-overflow"><small class="text-white">Bienvenid@ {{appSession.currentUser.PrimerNombre}}</small> </h5>
+                            </div>
+                            <a href="" class="dropdown-item notify-item" ng-click="CambiarPass()">
+                                <i class="mdi mdi-lock"></i><span>Contraseña</span>
+                            </a>
+                            <a href="" class="dropdown-item notify-item" ng-click="logout()">
+                                <i class="mdi mdi-logout"></i> <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="clearfix"></div>
+
+        </div> <!-- end container -->
+    </div>
+    <!-- end topbar-main -->
+
+    <div class="navbar-custom" >
+        <div class="container-fluid">
+            <div id="navigation">
+                <!-- Navigation Menu-->
+                <ul class="navigation-menu">
+
+                    <li class="has-submenu"><a ui-sref="index.main"><i class="ti-home"></i>Home</a></li>
+                    <li class="has-submenu" ng-if="appRoles.isVendedor(true)"><a ui-sref="hornex.dummyprodfaltantes"><i class="ti-info-alt"></i>Productos Faltantes</a></li>
+                    <li class="has-submenu" ng-if="appRoles.isVendedor(true)"><a ui-sref="hornex.vendpedidos"><i class="ti-shopping-cart"></i>Pedidos</a></li>
+
+
+                    <li class="has-submenu" ng-if="appRoles.isSysAdmin(true)"><a ui-sref="hornex.adminpedidos"><i class="ti-shopping-cart"></i>Pedidos</a></li>
+                    <li class="has-submenu" ng-if="appRoles.isSysAdmin(true)"><a ui-sref="hornex.prodfaltantes"><i class="ti-info-alt"></i>Productos Faltantes</a></li>
+                    <li class="has-submenu" ng-if="appRoles.isSysAdmin(true)"><a ui-sref="security.usuarios"><i class="ti-user"></i>Usuarios</a></li>
+
+                    <li class="has-submenu" ng-if="appRoles.isAdministracion(true)"><a ui-sref="hornex.administracionpedidos"><i class="ti-shopping-cart"></i>Pedidos</a></li>
+                    <li class="has-submenu" ng-if="appRoles.isAdministracion(true)"><a ui-sref="hornex.dummyprodfaltantes"><i class="ti-info-alt"></i>Productos Faltantes</a></li>
+
+                    <li class="has-submenu" ng-if="appRoles.isAuxDepo(true)"><a ui-sref="hornex.prodfaltantes"><i class="ti-info-alt"></i>Productos Faltantes</a></li>
+
+                    <li class="has-submenu" ng-if="appRoles.isDistribuidor(true)"><a ui-sref="hornex.distpedidos"><i class="ti-shopping-cart"></i>Pedidos</a></li>
+
+                    <div class="pull-right" style="margin-top: 10px" ng-show="$state.current.data.ShowBackButton">
+                        <button class="btn btn-primary waves-effect waves-light" ng-click="Volver()"> Volver</button>
+                    </div>
+                </ul>
+                <!-- End navigation menu -->
+            </div> <!-- end #navigation -->
+        </div> <!-- end container -->
+    </div> <!-- end navbar-custom -->
+</header>

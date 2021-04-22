@@ -1,0 +1,289 @@
+.modalMaximo{
+    width: 100%;
+    max-width: 100% !important;
+    padding-right: 28px;
+    padding-left: 15px;
+    padding-top: 10px;
+}
+.panelSeleccionado{
+    background-color: #66bb6a;
+}
+.labelSeleccionado{
+    color: white;
+}
+.panelNoSeleccionado{
+    background-color: white;
+}
+.labelNoSeleccionado{
+    color: #797979 !important;
+}
+
+.tituloCliente{
+    background-color: #66bb6a96;
+    font-weight: 500;
+    margin-bottom: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+.datosClientes{
+    margin-bottom: 5px;
+}
+.tituloArticulo{
+    margin-bottom: 5px;
+    font-size: 0.90rem;
+    background-color: #66adbb;
+    width: inherit;
+    color: white;
+    padding: 2px;
+}
+.inputArticulo{
+    /*width: 120px!important;*/
+    /*font-size: 25px;*/
+    /*text-align: center;*/
+    /*margin-left: 5px;*/
+    /*margin-right: 5px;*/
+    /*padding-left: 10px;*/
+    /*display:inline;*/
+
+
+    max-width: 70px!important;
+    font-size: 16px;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-left: 10px;
+    display:inline;
+}
+.rightAlignSm{
+    text-align: right;
+}
+.panelArticulo{
+    width: 25%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.txtTotal{
+    margin-top: 5px;
+    background-color: #66bb6a !important;
+    color: white;
+    padding: 4px;
+    font-size: 19px;
+}
+.verCelular{
+    display: none;
+}
+.verCelularDetallePedido{
+    display: none;
+}
+.badge-tomado{
+    color: #3f51b5;
+    border: 1px solid
+}
+.badge-importado{
+    color: #66bb6a;
+    border: 1px solid
+}
+.badge-eliminado{
+    color: red;
+    border: 1px solid
+}
+.badge-preenviado{
+    color: orange;
+    border: 1px solid
+}
+
+
+#loading-indicatornew {
+    position:fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(255,255,255,0.7);
+    z-index:9999;
+    display:none;
+}
+
+.menuLink{
+    font-size: 20px;
+}
+.menuCel {
+    display: none;
+}
+.muestroBotonesCel{
+    display: none;
+}
+
+.grillaSel{
+    background-color: grey !important;
+    color: white;
+}
+
+@-webkit-keyframes spin {
+    from {-webkit-transform:rotate(0deg);}
+    to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+#loading-indicatornew::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:48%;top:40%;
+    width:40px;height:40px;
+    border-style:solid;
+    border-color:black;
+    border-top-color:transparent;
+    border-width: 4px;
+    border-radius:50%;
+    -webkit-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
+}
+.prodFaltante{
+    margin-bottom: 5px;
+    padding-top: 0px;
+    font-size: 12px;
+    background-color: #ff00009e;
+    color: white;
+    text-align: center;
+}
+.colAdaptada{
+    width: 50%;
+    padding: 5px;
+}
+.btnCelular{
+
+}
+
+
+
+@media (max-width: 1800px) {
+    .panelArticulo{
+        width: 50%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .panelArticulo{
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 760px) {
+    .facet_sidebar {
+        display: none;
+    }
+    .rightAlignSm{
+        text-align: left;
+        margin-top: 15px;
+    }
+    .ocultoBotonesCel{
+        display: none;
+    }
+    .muestroBotonesCel{
+        display: block;
+    }
+    .colAdaptada{
+        width: 100%;
+    }
+    [uib-typeahead-popup].dropdown-menu {
+        font-size: 28px;
+    }
+    .ocultarCelularDetallePedido {
+        display: none;
+    }
+    .verCelularDetallePedido{
+        display: inherit;
+    }
+
+    .btnCelularCuadrados{
+        margin-bottom: 5px;
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 470px) {
+    .ocultarCelular {
+        display: none;
+    }
+    .verCelular{
+        display: inherit;
+    }
+
+    .txtTotal{
+        font-size: 20px;
+        display: block;
+    }
+    .btnCelular{
+        height: 40px;
+        width: 40px;
+        padding: 0px;
+        font-size: 20px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .labelSeleccionado{
+        margin-top: 10px !important;
+        font-size: 15px;
+    }
+    .labelNoSeleccionado{
+        margin-top: 10px !important;
+        font-size: 15px;
+    }
+    .h3Celular{
+        font-size: 16px !important;
+        margin-top: 5px !important;
+    }
+    .widget-bg-color-icon .bg-icon {
+        height: 50px;
+        width: 50px;
+    }
+    .widget-bg-color-icon .bg-icon i {
+        font-size: 15px;
+        line-height: 40px;
+    }
+    .cardboxCelular{
+        height: 78px;
+        padding: 15px;
+    }
+    .tituloHornex{
+        font-size: 13px;
+    }
+    .prodFaltante{
+        font-size: 14px;
+    }
+    .inputArticulo{
+        width: 90px !important;
+        max-width: 100px!important;
+        font-size: 20px;
+        text-align: center;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding-left: 10px;
+        display:inline;
+    }
+
+
+}
+
+/*@media (max-width: 900px) {*/
+    /*.ocultarCelularDetallePedido {*/
+        /*display: none;*/
+    /*}*/
+    /*.verCelularDetallePedido{*/
+        /*display: inherit;*/
+    /*}*/
+
+/*}*/
+
+@media (max-width: 991px) {
+    .menuCel {
+        display: contents;
+    }
+}

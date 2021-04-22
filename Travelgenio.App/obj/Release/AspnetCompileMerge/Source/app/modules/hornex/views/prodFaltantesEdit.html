@@ -1,0 +1,114 @@
+<form id="frmProductosFaltantes" name="frmProductosFaltantes" ng-submit="GuardarProducto()">
+    <div class="row card-box">
+        <div class="col-sm-12 text-right">
+            <button class="btn btn-primary btn-sm waves-effect waves-light" >Guardar</button>
+            <button class="btn btn-info btn-sm waves-effect waves-light" ng-click="volver()">Volver</button>
+        </div>
+    </div>
+    <div class="row card-box">
+        <div class="col-sm-12">
+            <div class="row">
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label for="fechad" class="control-label">Fecha Desde <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" id="fechad" name="fechad" data-parsley-required
+                               ng-model="objEditar.FechaDesde">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label for="fechah" class="control-label">Fecha Hasta <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" id="fechah" name="fechah" data-parsley-required
+                               ng-model="objEditar.FechaHasta">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label for="rol" class="control-label">Departamento<span class="text-danger">*</span></label>
+                        <select class="form-control" id="rol" data-parsley-required=""
+                                ng-model="objEditar.IDDEPTO" ng-change="changeDepartamento()"
+                                ng-options="obj.IDDEPTO as obj.NOMDEPTO for obj in lstDepartamentos">
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label for="rol" class="control-label">Sección<span class="text-danger">*</span></label>
+                        <select class="form-control" id="rol" data-parsley-required=""
+                                ng-model="objEditar.IDSECCION" ng-change="changeSeccion()"
+                                ng-options="obj.IDSECCION as obj.NOMSECCION for obj in lstSecciones">
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label for="rol" class="control-label">Familia</label>
+                        <select class="form-control" id="rol"
+                                ng-model="objEditar.IDFAMILIA" ng-change="changeFamilia(objEditar.IDFAMILIA)"
+                                ng-options="obj.IDFAMILIA as obj.NOMFAMILIA for obj in lstFamilias">
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 15px" ng-show="lstArticulos.length >0">
+                <div class="col-sm-12">
+                    <label>Seleccione Artículos</label>
+                    <div class="table-rep-plugin">
+                        <div class="table-responsive table-sm " data-pattern="priority-columns">
+                            <table id="tech-companies-1" class="table  table-striped" style="width: 100%">
+                                <thead>
+                                <tr>
+                                    <th style="width: 30px">
+                                        <div class="checkbox checkbox-primary">
+                                            <input id="todos" type="checkbox" checked="" ng-model="todos" ng-click="changeTodos()">
+                                            <label for="todos">
+
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th data-priority="1">
+                                        <span class="pointer" ng-click="orderByField='CODARTICULO'; reverseSort = !reverseSort">#</span>
+                                        <span ng-show="orderByField == 'CODARTICULO'">
+                                            <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                            <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                        </span>
+                                    </th>
+                                    <th data-priority="1">
+                                        <span class="pointer" ng-click="orderByField='DESCRIPCION'; reverseSort = !reverseSort">Nombre</span>
+                                        <span ng-show="orderByField == 'DESCRIPCION'">
+                                            <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                            <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                        </span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="obj in lstArticulos |filter:filtro | orderBy:orderByField:reverseSort">
+                                    <td class="text-center" style="width: 30px; padding-top: 0px">
+                                            <div class="checkbox checkbox-primary">
+                                                <input id="{{obj.CODARTICULO}}" type="checkbox" checked="" ng-model="obj.SEL">
+                                                <label for="{{obj.CODARTICULO}}">
+
+                                                </label>
+                                            </div>
+                                    </td>
+                                    <td data-priority="1" ng-click="obj.SEL = !obj.SEL" style="cursor: pointer;"><span>{{obj.CODARTICULO}}</span></td>
+                                    <td data-priority="1" ng-click="obj.SEL = !obj.SEL" style="cursor: pointer;"><span>{{obj.DESCRIPCION}}</span></td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

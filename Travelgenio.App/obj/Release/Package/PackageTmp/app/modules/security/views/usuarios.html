@@ -1,0 +1,246 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $('form').parsley();
+    });
+</script>
+
+
+<div class="row card-box">
+    <div class="col-sm-6">
+        <button class="btn btn-primary btn-sm waves-effect waves-light" ng-click="AgregarUsuario()">Agregar</button>
+    </div>
+    <div class="col-sm-6 rightAlignSm">
+        <h4>Listado de Usuarios</h4>
+        <input type="text" ng-model="filtro" placeholder="Filtrar..." class="form-control">
+    </div>
+</div>
+
+
+
+<div class="row m-t-10 card-box">
+    <div class="col-12">
+        <div class="">
+            <div class="table-rep-plugin">
+                <div class="table-responsive table-sm " data-pattern="priority-columns">
+                    <table id="tech-companies-1" class="table  table-striped">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">
+                                    <span class="pointer" ng-click="orderByField='User'; reverseSort = !reverseSort">Usuario</span>
+                                    <span ng-show="orderByField == 'User'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="3">
+                                    <span class="pointer" ng-click="orderByField='NombreCompleto'; reverseSort = !reverseSort">Nombre</span>
+                                    <span ng-show="orderByField == 'NombreCompleto'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="1">
+                                    <span class="pointer" ng-click="orderByField='Alta'; reverseSort = !reverseSort">Alta</span>
+                                    <span ng-show="orderByField == 'Alta'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th data-priority="3">
+                                    <span >Roles</span>
+                                </th>
+                                <th data-priority="3">
+                                    <span class="pointer" ng-click="orderByField='Activo'; reverseSort = !reverseSort">Estado</span>
+                                    <span ng-show="orderByField == 'Activo'">
+                                        <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                        <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                    </span>
+                                </th>
+                                <th class="text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in lstUsuarios |filter:filtro | orderBy:orderByField:reverseSort">
+                                <td data-priority="1" ng-click="EditarUsuario(obj)" style="cursor: pointer;"><span>{{obj.User}}</span></td>
+                                <td data-priority="3" ng-click="EditarUsuario(obj)" style="cursor: pointer;"><span>{{obj.NombreCompleto}}</span></td>
+                                <td data-priority="3" ng-click="EditarUsuario(obj)" style="cursor: pointer;"><span>{{obj.Alta |date:'dd/MM/yyyy'}}</span></td>
+                                <td data-priority="3" ng-click="EditarUsuario(obj)" style="cursor: pointer;">
+                                    <span ng-repeat="rol in obj.Roles">
+                                        <span class="badge badge-primary">{{rol.Nombre}}</span>
+                                    </span>
+                                </td>
+                                <td data-priority="1" ng-click="EditarUsuario(obj)" style="cursor: pointer;">
+                                    <span ng-show="obj.Activo" class="badge badge-success">Activo</span>
+                                    <span ng-show="!obj.Activo" class="badge badge-warning">Suspendido</span>
+                                </td>
+                                <td data-priority="1" class="text-right ">
+                                    <a class="btn btn-danger btn-sm waves-effect waves-light"
+                                       href="" ng-click="EliminarUsuario(obj)" title="Eliminar"><i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalEliminarUsuario" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Eliminar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>¿Confirma eliminar el usuario seleccionado?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary waves-effect waves-light" ng-click="ConfirmaEliminarUsuario()">Eliminar</button>
+                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="modalUsuario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <form id="frmUsuarios" name="frmUsuarios" ng-submit="Guardar()">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" ng-show="modo == 'A'">Agregar Usuario</h4>
+                    <h4 class="modal-title" ng-show="modo == 'E'">Modificar Usuario</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="rol" class="control-label">Rol<span class="text-danger">*</span></label>
+                                <select class="form-control" id="rol" data-parsley-required=""
+                                        ng-model="objEditar.ROLSEL" ng-change="SelRolCombo()" ng-disabled="modo=='E'"
+                                        ng-options="obj.RolID as obj.Nombre for obj in lstRoles">
+                                    <option value="">Seleccione...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12" ng-if="verComboEmpleados">
+                            <div class="form-group">
+                                <label for="empleo" class="control-label">Empleado asociado<span class="text-danger">*</span>
+                                    <i class="fa fa-info-circle text-primary" title="Al seleccionar el rol usuario se tiene que vincular a un empleado existente."></i>
+                                </label>
+                                <select class="form-control" id="empleo" data-parsley-required=""
+                                        ng-model="objEditar.Empleo.EmpleoID" ng-change="ChangeEmpleado()"
+                                        ng-options="obj.EmpleoID as obj.VendedorID + ' - ' +  obj.Persona.NombreCompleto for obj in lstEmpleadosCat">
+                                    <option value="">Seleccione...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12" ng-if="verComboClientes">
+                            <div class="form-group">
+                                <label for="conc" class="control-label">Cliente</label>
+                                <label class="pull-right">
+                                <input type="checkbox" ng-model="objEditar.CasasCentrales" ng-click="SoloCasasCentrales()"> Casas Centrales
+                                </label>
+                                <input type="text" ng-model="objCliente.Descripcion" name="conc" id="conc"
+                                       typeahead-on-select="setCliente($item)"
+                                       placeholder="Buscar.."
+                                       uib-typeahead="e.Codigo as e.Codigo + ' ' + e.NombreComercial for e in getClientes($viewValue)"
+                                       class="form-control"
+                                       typeahead-wait-ms="250"
+                                       typeahead-loading="loadingLocationsArt" autocomplete="on"
+                                       typeahead-no-results="noResultsArt" typeahead-append-to-body="true">
+                                <i ng-show="loadingLocationsArt" class="fa fa-loading"></i>
+                                <span class="themesecondary" ng-show="noResultsArt">
+                                    <i class="fa fa-exclamation-triangle "></i> No se encontraron Clientes.
+                                </span>
+                                <!--<label for="empleo" class="control-label">Cliente Asociado<span class="text-danger">*</span>-->
+                                    <!--<i class="fa fa-info-circle text-primary" title="Al seleccionar el rol Distribuidor Interior se tiene que vincular a un cliente."></i>-->
+                                <!--</label>-->
+                                <!--<label class="pull-right">-->
+                                    <!--<input type="checkbox" ng-model="objEditar.CasasCentrales" ng-click="SoloCasasCentrales()"> Casas Centrales-->
+                                <!--</label>-->
+
+                                <!--<select class="form-control" id="empleo" data-parsley-required=""-->
+                                        <!--ng-model="objEditar.ClienteID"-->
+                                        <!--ng-options="obj.Codigo as obj.NombreComercial + ' (' + obj.Codigo + ')' for obj in lstClientes |orderBy:'NombreComercial'">-->
+                                    <!--<option value="">Seleccione...</option>-->
+                                <!--</select>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="usuario" class="control-label">Usuario<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="usuario" name="usuario" data-parsley-required
+                                       placeholder="Ingrese usuario" ng-model="objEditar.User">
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-if="modo=='A'">
+                            <div class="form-group">
+                                <label for="pass" class="control-label">Contraseña<span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" id="pass" placeholder="Contraseña"
+                                       ng-model="objEditar.Password" data-parsley-required="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="nombre" class="control-label">Primer Nombre<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="nombre" placeholder="Primer Nombre"
+                                       ng-model="objEditar.PrimerNombre" data-parsley-required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="segnombre" class="control-label">Segundo Nombre</label>
+                                <input type="text" class="form-control" id="segnombre" placeholder="Segundo Nombre"
+                                       ng-model="objEditar.SegundoNombre">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="apellido" class="control-label">Primer Apellido<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="apellido" placeholder="Primer Apellido"
+                                       ng-model="objEditar.PrimerApellido" data-parsley-required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="segapellido" class="control-label">Segundo Apellido</label>
+                                <input type="text" class="form-control" id="segapellido" placeholder="Segundo Apellido"
+                                       ng-model="objEditar.SegundoApellido">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="checkbox checkbox-primary">
+                                    <input id="activo" type="checkbox" checked="" ng-model="objEditar.Activo">
+                                    <label for="activo">
+                                        Usuario Activo
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info waves-effect waves-light" >Guardar</button>
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

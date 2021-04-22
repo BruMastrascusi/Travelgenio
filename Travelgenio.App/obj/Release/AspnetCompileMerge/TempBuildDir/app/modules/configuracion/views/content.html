@@ -1,0 +1,16 @@
+<div id="wrapper">
+
+    <div ng-include="'views/common/navbar.html'"></div>
+
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+        <div class="wrapper">
+            <div class="container-fluid">
+                <div style="margin-top:10px; padding:20px" ui-view></div>
+            </div>
+        </div>
+
+        <div ng-include="'views/common/footer.html'"></div>
+    </div>
+
+
+</div>

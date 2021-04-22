@@ -1,0 +1,132 @@
+﻿body {
+    
+}
+
+th {
+    height: 25px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    font-size: 14px !important;
+}
+.pointer {
+    cursor: pointer;
+}
+
+.buttonAdd{
+    height: 25px;
+    width: 25px;
+    padding: 0px;
+}
+.panel-rojo{
+    background-color: #ffdada !important;
+}
+.panel-verde{
+    background-color: #dbffd6 !important;
+}
+.panel-amarillo{
+    background-color: #fffcd6 !important;
+}
+.panel-azul{
+    background-color: #d6f2ff !important;
+}
+.red{
+    color: #ef5350 !important;
+}
+
+
+.orgchart {
+    background: #e0e0e0;
+}
+
+
+.node{
+    width: 200px!important;
+}
+.orgchart .edge:hover {
+    color: #b7654b;
+    cursor: pointer;
+}
+
+.orgchart .node .edge {
+    font-size: 15px;
+    position: absolute;
+    color: black;
+    cursor: default;
+    transition: .2s;
+}
+.orgchart .edge.focuses {
+    color: #b7654b;
+    cursor: pointer;
+}
+
+.orgchart .node:hover {
+    background-color: transparent;
+}
+.orgchart .node.focused {
+    background-color: #3bafda;
+}
+
+
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:300px;
+    height:300px;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.inputfile + label {
+    padding: .25rem .5rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    font-size: .875rem;
+    font-weight: 700;
+    color: white;
+    background-color: #ea7676;
+    display: inline-block;
+    margin-bottom: 0px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #ec5656;
+}
+.inputfile + label {
+    cursor: pointer; /* "hand" cursor */
+}
+.spanLegajo{
+    margin-bottom: 5px;
+    text-align: left;
+    background-color: #03755be0;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    color: white;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.cambiaTamanio{
+    transition: color 0.4s, font-size 0.4s;
+}
+.cambiaTamanio:hover{
+    font-size: 14px;
+    color: #3bafda;
+}
+
+@media print
+{
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
+ 

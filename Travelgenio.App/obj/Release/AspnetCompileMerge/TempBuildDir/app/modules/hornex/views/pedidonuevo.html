@@ -1,0 +1,756 @@
+<div class="row card-box" style="margin-bottom: 10px" >
+    <div class="col-sm-12 muestroBotonesCel text-center">
+        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light" title="Ver Cliente"
+                style="margin-bottom: 5px; width: 60px; height: 60px;"
+                ng-disabled="objPedido.Cliente == null" ng-click="verCliente()"><i class="ti-search"></i>
+        </button>
+        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light" title="Productos Sugeridos"
+                style="margin-bottom: 5px; width: 60px; height: 60px;"
+                ng-disabled="objPedido.Cliente == null" ng-click="verSugeridos()"><i class="ti-shopping-cart-full"></i>
+        </button>
+        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light"
+                ng-click="verPedido()" title="Detalle Pedido"
+                style="margin-bottom: 5px; width: 60px; height: 60px;"><i class="ti-shopping-cart"></i>
+        </button>
+        <button class="btn btn-warning btn-sm waves-effect waves-light"
+                ng-click="recargarPedido()" title="Recargar"
+                style="margin-bottom: 5px; width: 60px; height: 60px;"><i class="fa fa-refresh"></i>
+        </button>
+        <button class="btn btn-success btn-sm waves-effect waves-light"
+                ng-click="guardarPedido()" title="Guardar"
+                style="margin-bottom: 5px; width: 60px; height: 60px;"><i class="ti-save"></i>
+        </button>
+        <button class="btn btn-warning btn-sm waves-effect waves-light"  title="Volver"
+                ng-click="volver()" style="margin-bottom: 5px;width: 60px; height: 60px;"
+                ng-show="modoPedido=='M'"><i class="ti-arrow-left"></i></button>
+    </div>
+
+    <div class="col-sm-12 ocultoBotonesCel text-center">
+        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light" style="margin-bottom: 5px"
+                ng-disabled="objPedido.Cliente == null" ng-click="verCliente()"><i class="ti-search"></i> Cliente</button>
+        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light" style="margin-bottom: 5px"
+                ng-disabled="objPedido.Cliente == null" ng-click="verSugeridos()"><i class="ti-shopping-cart-full"></i> Productos Sugeridos</button>
+        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light" ng-click="verPedido()" style="margin-bottom: 5px"><i class="ti-shopping-cart"></i> Detalle Pedido</button>
+        <button class="btn btn-outline-warning btn-sm waves-effect waves-light" ng-click="recargarPedido()" style="margin-bottom: 5px"><i class="fa fa-refresh"></i> Recargar</button>
+        <button class="btn btn-success btn-sm waves-effect waves-light" ng-click="guardarPedido()" style="margin-bottom: 5px"><i class="ti-save"></i> Guardar</button>
+        <button class="btn btn-warning btn-sm waves-effect waves-light" ng-click="volver()" style="margin-bottom: 5px" ng-show="modoPedido=='M'">
+            <i class="ti-arrow-left"></i> Volver
+        </button>
+    </div>
+
+</div>
+
+<div class="row card-box" style="margin-bottom: 15px" ng-show="Camino.length > 0">
+    <div class="panelArticulo" ng-repeat="cam in Camino" ng-click="verCamino(cam)">
+        <div class="widget-bg-color-icon card-box" style="cursor: pointer; background-color: #66adbb; color: white; margin-bottom: 5px; padding: 15px">
+
+            <div class="row" ng-if="cam.Paso <4">
+                <div class="col-sm-12 text-right">
+                    <p style="font-size: 14px; margin-bottom: 0px">
+                        <span><i class="fa fa-arrow-circle-left"></i> Volver Paso {{cam.Paso}}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <span style="font-size: 23px; margin-right: 10px; font-weight: 600; margin-top: 10px">{{cam.Paso}}</span> <span> {{cam.Descripcion}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="objSeleccion.Paso==1">
+    <div class="row card-box">
+        <div class="colAdaptada">
+            <label for="conc" class="control-label">Cliente</label>
+            <h4 ng-show="modoPedido=='M'">{{objPedido.Cliente.NombreComercial}}</h4>
+            <input type="text" ng-model="objCliente.Descripcion" name="conc" id="conc" ng-show="modoPedido=='A'" autocomplete="off" onclick="this.select()"
+                typeahead-on-select="setCliente($item)"
+                placeholder="Buscar.."
+                uib-typeahead="e.Codigo as e.Codigo + ' ' + e.NombreComercial for e in getClientes($viewValue)"
+                class="form-control"
+                typeahead-wait-ms="250"
+                typeahead-loading="loadingLocationsArt" autocomplete="on"
+                typeahead-no-results="noResultsArt" typeahead-append-to-body="true">
+                <i ng-show="loadingLocationsArt" class="fa fa-loading"></i>
+                <span class="themesecondary" ng-show="noResultsArt">
+                    <i class="fa fa-exclamation-triangle "></i> Despues de la tercer letra se mostrarán los resultados.
+                </span>
+        </div>
+        <div class="colAdaptada rightAlignSm" >
+            <div class="row" ng-if="modoPagina.ModoRol=='Admin' || modoPagina.ModoRol=='Vend' || modoPagina.ModoRol=='Administracion'">
+                <div class="col-sm-12">
+                    <label>Depósito</label>
+                    <select class="form-control" ng-change="validarDeposito()"
+                            ng-model="objPedido.Deposito"
+                            ng-options="obj.Id as obj.Nombre for obj in lstDepositos">
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" ng-if="modoPedido=='M'" style="margin-top: 10px">
+                <div class="col-sm-12">
+                    <select class="form-control" id="rol"
+                            ng-model="objPedido.Estado.Id" disabled
+                            ng-options="obj.Id as obj.Descripcion for obj in lstEstados">
+                        <option value="">Seleccione Estado</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row card-box" style="margin-top: 30px;" >
+        <div class="colAdaptada">
+            <input type="text" class="form-control" placeholder="Filtrar Departamentos" ng-model="filtro" onclick="this.select()">
+        </div>
+    </div>
+
+    <div class="row" ng-if="objCliente !=null" style="margin-top: 50px">
+        <div class="panelArticulo" ng-repeat="depto in lstDepartamentos |filter:filtro">
+            <div class="widget-bg-color-icon card-box"  ng-class="{'panelNoSeleccionado': !depto.SEL, 'panelSeleccionado': depto.SEL}" ng-click="changeDepartamento(depto)"
+                 style="padding: 5px; padding-right: 15px; min-height: 110px; cursor: pointer;" >
+                <div class="pull-left">
+                    <img ng-src="img/productos/{{depto.IMG}}" style="height: 100px; cursor: pointer;" />
+                </div>
+                <div class="text-right" >
+                    <h5 ng-class="{'labelNoSeleccionado': !depto.SEL, 'labelSeleccionado': depto.SEL}"
+                        style="margin-top: 25px; cursor: pointer">{{depto.NOMDEPTO}}</h5>
+                </div>
+                <div class="clearfix text-right" >
+                    <button class="btn btn-light btn-sm waves-effect waves-light" style="z-index: 999" ng-click="EliminarProductos(depto)" ng-show="depto.SEL">
+                        <i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="objSeleccion!=null && objSeleccion.Paso ==2">
+    <div class="row" ng-if="objCliente !=null" style="margin-top: 25px">
+        <div class="panelArticulo" ng-repeat="sec in lstSecciones">
+            <div class="widget-bg-color-icon card-box" ng-class="{'panelNoSeleccionado': !sec.SEL, 'panelSeleccionado': sec.SEL}" ng-click="changeSeccion(sec)"
+                 style="padding: 5px; padding-right: 15px; min-height: 110px; cursor: pointer;" >
+                <div class="pull-left">
+                    <img ng-src="img/productos/{{sec.IMG}}" style="height: 100px; cursor: pointer" />
+                </div>
+                <div class="text-right" >
+                    <h5 ng-class="{'labelNoSeleccionado': !sec.SEL, 'labelSeleccionado': sec.SEL}"
+                        style="margin-top: 5px;margin-bottom: 5px; cursor: pointer;">{{sec.NOMSECCION}}</h5>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="objSeleccion!=null && objSeleccion.Paso ==3">
+    <div class="row" ng-if="objCliente !=null" style="margin-top: 25px">
+        <!--col-lg-3 col-md-6-->
+        <div class="panelArticulo" ng-repeat="fam in lstFamilias">
+            <div class="widget-bg-color-icon card-box" ng-class="{'panelNoSeleccionado': !fam.SEL, 'panelSeleccionado': fam.SEL}" ng-click="changeFamilia(fam)"
+                 style="padding: 5px; padding-right: 15px; min-height: 110px; cursor: pointer;" >
+                <div class="pull-left">
+                    <img ng-src="img/productos/{{fam.IMG}}" style="height: 100px; cursor: pointer;" />
+                </div>
+                <div class="text-right" >
+                    <h5 ng-class="{'labelNoSeleccionado': !fam.SEL, 'labelSeleccionado': fam.SEL}"
+                        style="margin-top: 5px;margin-bottom: 5px; cursor: pointer">{{fam.NOMFAMILIA}}</h5>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="objSeleccion!=null && objSeleccion.Paso ==4">
+    <div class="row" ng-if="objCliente !=null" style="margin-top: 25px">
+        <div class="panelArticulo" ng-repeat="art in lstArticulos">
+            <div class="widget-bg-color-icon card-box" style="padding: 5px" >
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5 class="pull-left tituloArticulo" style="">{{art.CODARTICULO}} - {{art.DESCRIPCION}}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="prodFaltante"><span ng-show="art.FaltaDesde !=null" >Falta {{art.FaltaDesde|date:'dd/MM/yyyy'}} - {{art.FaltaHasta|date:'dd/MM/yyyy'}}</span> </p>
+                        <div class="pull-left" style="margin-right: 5px">
+                            <img ng-src="img/productos/{{art.IMG}}" style="height: 150px; width: 100px; cursor: pointer" ng-click="verImagen(art, 'art')">
+                        </div>
+
+                        <div class="row ocultarCelular" >
+                            <div class="col-sm-12 text-center">
+                                <h5 style="font-size: 15px" >
+                                    Unidad
+                                    <!--<span ng-show="art.PrecioVentaNuevo == null || art.PrecioVentaNuevo == 0"> $ {{art.PrecioVenta |number:2}}</span>-->
+                                    <!--<span ng-show="art.PrecioVentaNuevo !=null && art.PrecioVentaNuevo > 0"><del class="text-danger">$ {{art.PrecioVenta |number:2}}</del></span>-->
+                                    <!--<span ng-show="art.PrecioVentaNuevo !=null && art.PrecioVentaNuevo > 0" class="text-success">&nbsp; $ {{art.PrecioVentaNuevo |number:2}}</span>-->
+
+                                    <span ng-show="art.PrecioVentaNuevo == null"> $ {{art.PrecioVenta |number:2}}</span>
+                                    <span ng-show="art.PrecioVentaNuevo !=null && art.PrecioVentaNuevo !=null"><del class="text-danger">$ {{art.PrecioVenta |number:2}}</del></span>
+                                    <span ng-show="art.PrecioVentaNuevo !=null && art.PrecioVentaNuevo !=null" class="text-success">&nbsp; $ {{art.PrecioVentaNuevo |number:2}}</span>
+                                </h5>
+
+                                <button class="btn btn-outline-info waves-effect btn-sm btnCelular"  ng-if="modoPagina.ModoRol !='Dist'"
+                                        ng-class="{'active': art.DtoPorcentaje}" ng-click="dtoPorcentaje(art)">
+                                    <strong> %</strong>
+                                </button>
+                                <button class="btn btn-outline-info waves-effect btn-sm btnCelular" ng-if="modoPagina.ModoRol !='Dist'"
+                                        ng-class="{'active': art.DtoPesos}" ng-click="dtoPesos(art)">
+                                    <strong>$</strong>
+                                </button>
+
+                                <input type="number" class="form-control inputArticulo"  ng-model="art.DESCUENTOESPECIAL" ng-show="art.DtoPorcentaje" step="0.01" onclick="this.select()">
+                                <input type="number" class="form-control inputArticulo" ng-model="art.DtoPesosValor" ng-show="art.DtoPesos" onclick="this.select()">
+
+                                <button class="btn btn-success waves-effect btn-sm btnCelular" ng-show="art.DtoPorcentaje || art.DtoPesos" ng-click="aplicaDtos(art)">
+                                    <i class="mdi mdi-check"></i>
+                                </button>
+                                <button class="btn btn-danger waves-effect btn-sm btnCelular" ng-show="art.DtoPorcentaje || art.DtoPesos" ng-click="eliminarDtos(art)">
+                                    <i class="mdi mdi-delete"></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="clearfix"></div>
+                                <div class="row">
+                                    <div style="margin-top: 20px" class="col-sm-12 text-center">
+                                        Cant. Empaques
+                                        <button class="btn btn-outline-secondary waves-effect btn-sm btnCelular" ng-click="menosSabor(art)"><i class="ti ti-minus"></i></button>
+                                        <input type="number" id="{art.CODARTICULO}" class="form-control inputArticulo" ng-model="art.CANTIDAD" ng-blur="CambiaCantidad(art)" onclick="this.select()">
+                                        <button class="btn btn-outline-secondary waves-effect btn-sm btnCelular" ng-click="masSabor(art)"><b><i class="ti ti-plus"></i></b></button>
+                                    </div>
+                                    <div style="margin-top: 5px" class="col-sm-12 text-center">
+                                        Empaque x: {{art.EMPAQUE}} {{art.UNIDMED}}
+                                        <h4 class="txtTotal" ng-show="art.Total > 0 || (art.DESCUENTOESPECIAL == 100 && art.Total == 0)">
+                                            $ {{art.Total |number:2}}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row verCelular">
+                            <div class="col-sm-12 text-right">
+                                <h5 style="margin-bottom: 0px; font-size: 18px" >
+                                    <span ng-show="art.PrecioVentaNuevo == null || art.PrecioVentaNuevo == 0"> $ {{art.PrecioVenta |number:2}}</span>
+                                    <span ng-show="art.PrecioVentaNuevo !=null && art.PrecioVentaNuevo > 0"><del class="text-danger">$ {{art.PrecioVenta |number:2}}</del></span>
+                                    <span ng-show="art.PrecioVentaNuevo !=null && art.PrecioVentaNuevo > 0" class="text-success">$ {{art.PrecioVentaNuevo |number:2}}</span>
+                                </h5>
+                            </div>
+                            <div class="col-sm-12 text-right" style="margin-top: 10px">
+                                <button class="btn btn-outline-info waves-effect btn-sm btnCelular" ng-class="{'active': art.DtoPorcentaje}" ng-click="dtoPorcentaje(art)">
+                                    <strong> %</strong>
+                                </button>
+                                <button class="btn btn-outline-info waves-effect btn-sm btnCelular" ng-class="{'active': art.DtoPesos}" ng-click="dtoPesos(art)">
+                                    <strong>$</strong>
+                                </button>
+                            </div>
+                            <div class="col-sm-12 text-right" style="margin-top: 10px">
+                                <input type="number" class="form-control inputArticulo" ng-model="art.DESCUENTOESPECIAL" ng-show="art.DtoPorcentaje" step="0.01" onclick="this.select()">
+                                <input type="number" class="form-control inputArticulo" ng-model="art.DtoPesosValor" ng-show="art.DtoPesos" onclick="this.select()">
+                            </div>
+                            <div class="col-sm-12 text-right" style="margin-top: 10px">
+                                <button class="btn btn-success waves-effect btn-sm btnCelular" ng-show="art.DtoPorcentaje || art.DtoPesos" ng-click="aplicaDtos(art)">
+                                    <i class="mdi mdi-check"></i>
+                                </button>
+                                <button class="btn btn-danger waves-effect btn-sm btnCelular" ng-show="art.DtoPorcentaje || art.DtoPesos" ng-click="eliminarDtos(art)">
+                                    <i class="mdi mdi-delete"></i>
+                                </button>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div style="margin-top: 30px" class="col-sm-12 text-center">
+                                    Cant. Empaques
+                                    <button class="btn btn-outline-secondary waves-effect btn-md btnCelular" ng-click="menosSabor(art)"><i class="ti ti-minus"></i></button>
+                                    <input type="number" class="form-control" ng-model="art.CANTIDAD" ng-blur="CambiaCantidad(art)" onclick="this.select()"
+                                           style="width: 90px !important;max-width: 100px!important;font-size: 20px;
+                                            text-align: center;margin-left: 5px;margin-right: 5px;padding-left: 10px; display:inline " >
+                                    <button class="btn btn-outline-secondary waves-effect btn-md btnCelular" ng-click="masSabor(art)"><b><i class="ti ti-plus"></i></b></button>
+                                </div>
+                                <div style="margin-top: 10px" class="col-sm-12 text-center">
+                                    Empaque x: {{art.EMPAQUE}} {{art.UNIDMED}}
+                                    <h4 class="txtTotal" ng-show="art.Total > 0">
+                                        $ {{art.Total |number:2}}
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="detallePedido" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modalMaximo">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Detalle del Pedido</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 ocultarCelularDetallePedido">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive " data-pattern="priority-columns">
+                                <table id="tech-companies-1" class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <!--<th data-priority="1">#</th>-->
+                                        <th data-priority="1">Producto</th>
+                                        <th data-priority="1" class="text-right">% Dto</th>
+                                        <th data-priority="1" class="text-right">Cantidad</th>
+                                        <th data-priority="1" class="text-right">Emp x Cant</th>
+                                        <th data-priority="1" class="text-center">Stock</th>
+                                        <th data-priority="1" class="text-right">Empaque</th>
+
+                                        <th data-priority="1" class="text-right">$ Unidad</th>
+                                        <th data-priority="1" class="text-right">$ Dto</th>
+                                        <th data-priority="1" class="text-right">Total</th>
+                                        <th data-priority="1"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="obj in objPedido.Articulos |filter:filtro | orderBy:orderByField:reverseSort" ng-class="{'grillaSel':obj.SEL}" ng-click="obj.SEL = !obj.SEL" style="cursor: pointer">
+                                        <td data-priority="1"><span>{{obj.DESCRIPCION}}</span></td>
+                                        <td data-priority="1" class="text-right">
+                                            <span ng-if="obj.DESCUENTOESPECIAL !=null">{{obj.DESCUENTOESPECIAL |number:2}}</span>
+                                        </td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.CANTIDAD}}</span></td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.CANTIDAD * obj.EMPAQUE}}</span></td>
+                                        <td data-priority="1" class="text-center">
+                                            <span ng-if="obj.FaltaDesde==null" class="badge badge-success">Ok</span>
+                                            <span ng-if="obj.FaltaDesde!=null" class="badge badge-danger">
+                                                {{obj.FaltaDesde |date:'dd/MM/yyyy'}} - {{obj.FaltaHasta |date:'dd/MM/yyyy'}}
+                                            </span>
+                                        </td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.EMPAQUE}}</span></td>
+
+                                        <td data-priority="1" class="text-right"><span>{{obj.PrecioVenta |number:2}}</span></td>
+
+                                        <td data-priority="1" class="text-right">
+                                            <span ng-if="obj.PrecioVentaNuevo!=null">{{obj.PrecioVentaNuevo |number:2}}</span>
+                                        </td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.Total |number:2}}</span></td>
+                                        <td data-priority="1" class="text-right">
+                                            <a class="btn btn-light btn-sm waves-effect waves-light"
+                                               href="" ng-click="EliminarProducto(obj, $index)" title="Eliminar"><i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                        <td class="text-right" style="border-top: 1px solid grey">TOTAL</td>
+                                        <td class="text-right" style="border-top: 1px solid grey"><strong> {{objPedido.TOTAL |number:2}}</strong></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 verCelularDetallePedido" ng-repeat="obj in objPedido.Articulos">
+                        <div class="row" style="margin-bottom: 15px; width: 100%">
+                            <div class="col-sm-12 text-center" style="background-color: #8080803b;padding: 3px;">
+                                <p style="font-size: 14px;margin-bottom: 5px;">
+                                    <strong> {{obj.CODARTICULO}} - {{obj.DESCRIPCION}}</strong>
+                                </p>
+                            </div>
+                            <div class="col-sm-12 text-center" style="margin-top: 5px">
+                                <p style="margin-bottom: 5px; font-size: 13px">
+                                    <span><strong>Uni: </strong> {{obj.PrecioVenta |number:2}}</span>
+                                    <span ng-if="obj.DESCUENTOESPECIAL !=null"><strong> | % Dto: </strong> {{obj.DESCUENTOESPECIAL |number:2}}</span>
+                                    <span ng-if="obj.PrecioVentaNuevo!=null"><strong> | $ Dto: </strong>{{obj.PrecioVentaNuevo |number:2}}</span>
+                                </p>
+                            </div>
+                            <div class="col-sm-12 text-center" ng-if="obj.FaltaDesde !=null">
+                                <p class="badge badge-danger" >
+                                    Falta {{obj.FaltaDesde |date:'dd/MM/yyyy'}} - {{obj.FaltaHasta |date:'dd/MM/yyyy'}}
+                                </p>
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                <span style="border: 1px solid grey; font-size: 14px; padding: 2px">
+                                    <strong>Cant: </strong>
+                                    <span style="color:red"> {{obj.CANTIDAD}} x {{obj.EMPAQUE}}</span>
+                                </span>
+                                &nbsp;
+                                <span style="border: 1px solid grey; font-size: 14px; padding: 2px"><strong>Total: </strong> {{obj.Total |number:2}}</span>
+                                <a class="btn btn-danger btn-sm waves-effect waves-light pull-right"
+                                   href="" ng-click="EliminarProducto(obj, $index)" title="Eliminar"><i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-12 verCelularDetallePedido" >
+                        <div class="row" style="width: 100%">
+                            <div class="col-sm-12 text-center" style="border-top: 1px solid grey;margin-top: 17px;">
+                                <p style="font-size: 17px">TOTAL: <strong> {{objPedido.TOTAL |number:2}}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalSugeridos" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modalMaximo">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Productos Sugeridos</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 ocultarCelularDetallePedido text-right" >
+                        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light" ng-click="ordenDefecto()" >Orden Defecto</button>
+                    </div>
+                    <div class="col-sm-12 ocultarCelularDetallePedido">
+
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive " data-pattern="priority-columns">
+                                <table id="tech-companies-2" class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th data-priority="1">
+                                            <span class="pointer" ng-click="orderByField='CODARTICULO'; reverseSort = !reverseSort">#</span>
+                                            <span ng-show="orderByField == 'CODARTICULO'">
+                                                <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                                <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                            </span>
+                                        </th>
+                                        <th data-priority="1" >
+                                            <span class="pointer" ng-click="orderByField='Descripcion'; reverseSort = !reverseSort">Descripción</span>
+                                            <span ng-show="orderByField == 'Descripcion'">
+                                                <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                                <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                            </span>
+                                        </th>
+                                        <th data-priority="1" class="text-right">
+                                            <span class="pointer" ng-click="orderByField='Cantidad'; reverseSort = !reverseSort">Cantidad</span>
+                                            <span ng-show="orderByField == 'Cantidad'">
+                                                <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                                <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                            </span>
+                                        </th>
+                                        <th data-priority="1" class="text-right">
+                                            <span class="pointer" ng-click="orderByField='EMPAQUE'; reverseSort = !reverseSort">Empaque</span>
+                                            <span ng-show="orderByField == 'EMPAQUE'">
+                                                <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                                <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                            </span>
+                                        </th>
+                                        <th data-priority="1" class="text-right">
+                                            <span class="pointer" ng-click="orderByField='Total'; reverseSort = !reverseSort">Total</span>
+                                            <span ng-show="orderByField == 'Total'">
+                                                <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                                <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                            </span>
+                                        </th>
+                                        <th data-priority="1" class="text-right">
+                                            <span class="pointer" ng-click="orderByField='Importe'; reverseSort = !reverseSort">$ Importe</span>
+                                            <span ng-show="orderByField == 'Importe'">
+                                                <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                                <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                            </span>
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="obj in lstSugeridos |filter:filtro | orderBy:orderByField:reverseSort">
+                                        <td data-priority="1" ><span>{{obj.CODARTICULO}} </span></td>
+                                        <td data-priority="1" ><span>{{obj.Descripcion}}</span></td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.Cantidad}}</span></td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.EMPAQUE}}</span></td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.Total}}</span></td>
+                                        <td data-priority="1" class="text-right"><span>{{obj.Importe |number:2}}</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 muestroBotonesCel text-center" style="margin-bottom: 15px">
+                        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light"
+                                style="margin-bottom: 5px; width: 90px; height: 60px;" ng-click="ordenDefecto()"> Defecto
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light"
+                                style="margin-bottom: 5px; width: 60px; height: 60px;" ng-click="orderByField='Importe'; reverseSort = !reverseSort">
+                                $
+                                <span ng-show="orderByField == 'Importe'">
+                                    <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                    <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                </span>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light"
+                                style="margin-bottom: 5px; width: 90px; height: 60px;" ng-click="orderByField='Cantidad'; reverseSort = !reverseSort">
+                                Cantidad
+                                <span ng-show="orderByField == 'Cantidad'">
+                                    <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                    <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                </span>
+                        </button>
+                    </div>
+
+
+
+                    <div class="col-sm-12 verCelularDetallePedido" ng-repeat="obj in lstSugeridos |filter:filtro | orderBy:orderByField:reverseSort">
+                        <div class="row" style="margin-bottom: 15px; width: 100%">
+                            <div class="col-sm-12 text-center" style="background-color: #8080803b;padding: 3px;">
+                                <p style="font-size: 14px;margin-bottom: 5px;">
+                                    <strong> {{obj.CODARTICULO}} - {{obj.Descripcion}}</strong>
+                                </p>
+                            </div>
+                            <div class="col-sm-12 text-center" style="margin-top: 5px">
+                                <p style="margin-bottom: 5px; font-size: 13px">
+                                    <span><strong>Cant: </strong> {{obj.Cantidad}} </span>
+                                    <span><strong> | Emp: </strong> {{obj.EMPAQUE}} </span>
+                                    <span><strong> | Cantidad: </strong> {{obj.Cantidad}} </span>
+                                </p>
+                            </div>
+                            <div class="col-sm-12 text-center" style="border-top: 1px solid grey;margin-top: 17px;">
+                                <p style="font-size: 17px">Importe: <strong> {{obj.Importe |number:2}}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="modalCliente" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-lg" style="width: 100% !important;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">{{objClienteData.NombreComercial}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <p class="tituloCliente">Código</p>
+                        <p class="datosClientes">{{objClienteData.Codigo}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 rightAlignSm">
+                        <p class="tituloCliente">Cuenta Corriente</p>
+                        <p class="datosClientes">{{objClienteData.CuenatCorriente}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <p class="tituloCliente">Nombre</p>
+                        <p class="datosClientes">{{objClienteData.NombreComercial}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 rightAlignSm">
+                        <p class="tituloCliente">Razon Social</p>
+                        <p class="datosClientes">{{objClienteData.RazonSocial}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <p class="tituloCliente">Direccion</p>
+                        <p class="datosClientes">{{objClienteData.Direccion}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 rightAlignSm">
+                        <p class="tituloCliente">Localidad</p>
+                        <p class="datosClientes">{{objClienteData.Localidad}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <p class="tituloCliente">Email</p>
+                        <p class="datosClientes">{{objClienteData.Email}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 rightAlignSm">
+                        <p class="tituloCliente">Teléfono</p>
+                        <p class="datosClientes">{{objClienteData.Telefono}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <p class="tituloCliente">Contacto</p>
+                        <p class="datosClientes">{{objClienteData.Contacto}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 rightAlignSm">
+                        <p class="tituloCliente">Rut</p>
+                        <p class="datosClientes">{{objClienteData.Ruc}}</p>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6">
+                        <p class="tituloCliente">Condiciones de Pago</p>
+                        <p class="datosClientes">{{objClienteData.CondicionesDePagoDsc}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 rightAlignSm">
+                        <p class="tituloCliente">Descuento Canal</p>
+                        <p class="datosClientes">{{objClienteData.Descuento}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <p class="tituloCliente">Descuento Negociado</p>
+                        <p class="datosClientes">{{objClienteData.DescuentoNegociado}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 rightAlignSm">
+                        <p class="tituloCliente">Condiciones Negociadas</p>
+                        <p class="datosClientes">{{objClienteData.DescCond}}</p>
+                    </div>
+
+
+
+
+                    <div class="col-sm-12">
+                        <p class="tituloCliente">Vendedor</p>
+                        <p class="datosClientes">{{objClienteData.Vendedor.Nombre}}</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <p class="tituloCliente">Observaciones</p>
+                        <p class="datosClientes">{{objClienteData.Observaciones1}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="modalObservaciones" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-lg" style="width: 100% !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Observaciones</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Órden de Compra</label>
+                        <input type="text" class="form-control" ng-model="objPedido.ORDENCOMPRA"/>
+                    </div>
+                    <div class="col-sm-12" style="margin-top: 5px">
+                        <label>Observaciones</label>
+                        <textarea class="form-control" rows="8" style="height: 150px" ng-model="objPedido.OBSERVACIONES"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect btn-sm" data-dismiss="modal" ng-click="confirmaGuardarPedido()">Guardar</button>
+                <button type="button" class="btn btn-default waves-effect btn-sm" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalDeposito" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Atención</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p><i class="fa fa-info-circle red" style="font-size: 20px"></i> ¿Al modificar el depósito puede generar errores en el stock, desea cambiarlo de todos modos?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect btn-sm" ng-click="confirmaValidarDeposito()">Si</button>
+                <button type="button" class="btn btn-default waves-effect btn-sm" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalEliminar" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Eliminar Departamento</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>¿Desea eliminar el departamento y todos los artículos ingresados?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect btn-sm" ng-click="ConfirmaEliminarProductos()">Confirmar</button>
+                <button type="button" class="btn btn-default waves-effect btn-sm" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalImagen" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >{{objVer.Codigo}} - {{objVer.Nombre}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img ng-src="img/productos/G_{{objVer.Imagen}}" style="width: 100%;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect btn-sm" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalRecargar" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Atención</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>¿Va a vaciar los datos del pedido, está seguro? </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect btn-sm" ng-click="confirmaRecargarPedido()">Vaciar</button>
+                <button type="button" class="btn btn-default waves-effect btn-sm" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,9 @@
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.DataAccess\obj\Debug\Travelgenio.DataAccess.csprojAssemblyReference.cache
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.DataAccess\obj\Debug\Travelgenio.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.DataAccess\bin\Debug\Travelgenio.DataAccess.dll
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.DataAccess\bin\Debug\Travelgenio.DataAccess.pdb
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.DataAccess\obj\Debug\Travelgenio.DataAccess.dll
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.DataAccess\obj\Debug\Travelgenio.DataAccess.pdb
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.DataAccess\bin\Debug\Travelgenio.Sdk.dll
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.DataAccess\bin\Debug\Travelgenio.Sdk.pdb
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.DataAccess\obj\Debug\Travelgenio.DataAccess.csproj.CopyComplete

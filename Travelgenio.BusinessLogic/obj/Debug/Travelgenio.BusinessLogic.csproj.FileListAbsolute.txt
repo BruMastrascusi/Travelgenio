@@ -1,0 +1,12 @@
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\obj\Debug\Travelgenio.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\bin\Debug\Travelgenio.BusinessLogic.dll
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\bin\Debug\Travelgenio.BusinessLogic.pdb
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\bin\Debug\Travelgenio.DataAccess.dll
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\bin\Debug\Travelgenio.DataAccess.pdb
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\obj\Debug\Travelgenio.BusinessLogic.csprojAssemblyReference.cache
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\obj\Debug\Travelgenio.BusinessLogic.csproj.CopyComplete
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\obj\Debug\Travelgenio.BusinessLogic.dll
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\obj\Debug\Travelgenio.BusinessLogic.pdb
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\bin\Debug\Travelgenio.Sdk.dll
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\bin\Debug\Travelgenio.Sdk.pdb
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.BusinessLogic\bin\Debug\NReco.PdfGenerator.dll

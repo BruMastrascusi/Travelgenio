@@ -1,0 +1,141 @@
+
+
+<div class="row card-box" >
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="number" ng-model="diasMas" min="0" class="form-control pull-left" style="width: 60px">
+                <span>Días a visualizar</span>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+            <div class="col-sm-12">
+                <button class="btn btn-primary btn-sm waves-effect waves-light" ng-click="AgregarProducto()" ng-show="!modoDummy">Agregar</button>
+                <button class="btn btn-info btn-sm waves-effect waves-light" ng-click="CambiarProductos()">
+                    <span ng-show="!verTodos">Ver Todos</span>
+                    <span ng-show="verTodos">Ver Pendientes</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 rightAlignSm">
+        <h4 class="tituloHornex">Listado de Productos Faltantes</h4>
+        <input type="text" ng-model="filtro" placeholder="Filtrar..." class="form-control">
+    </div>
+</div>
+
+
+
+
+<div class="row m-t-10 card-box">
+    <div class="col-12">
+        <div class="">
+            <div class="table-rep-plugin">
+                <div class="table-responsive table-sm " data-pattern="priority-columns">
+                    <table id="tech-companies-1" class="table  table-striped">
+                        <thead>
+                        <tr>
+                            <th data-priority="1">
+                                <span class="pointer" ng-click="orderByField='Codigo'; reverseSort = !reverseSort">Código</span>
+                                <span ng-show="orderByField == 'User'">
+                                    <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                    <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                </span>
+                            </th>
+                            <th data-priority="1">
+                                <span class="pointer" ng-click="orderByField='Nombre'; reverseSort = !reverseSort">Nombre</span>
+                                <span ng-show="orderByField == 'Nombre'">
+                                    <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                    <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                </span>
+                            </th>
+                            <th data-priority="1" class="text-center">
+                                <span class="pointer" ng-click="orderByField='FechaDesde'; reverseSort = !reverseSort">Desde</span>
+                                <span ng-show="orderByField == 'FechaDesde'">
+                                    <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                    <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                </span>
+                            </th>
+                            <th data-priority="1" class="text-center">
+                                <span class="pointer" ng-click="orderByField='FechaHasta'; reverseSort = !reverseSort">Hasta</span>
+                                <span ng-show="orderByField == 'FechaHasta'">
+                                    <i ng-show="reverseSort" class=" mdi mdi-arrow-down-bold"></i>
+                                    <i ng-show="!reverseSort" class=" mdi mdi-arrow-up-bold"></i>
+                                </span>
+                            </th>
+                            <th class="text-center">Status</th>
+                            <th class="text-right" ng-if="!modoDummy">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in lstProductos |filter:filtro | orderBy:orderByField:reverseSort" ng-class="{'usuariobaja': obj.Estado ==0}">
+                            <td data-priority="1" ng-click="EditarProducto(obj)" style="cursor: pointer;"><span>{{obj.Codigo}}</span></td>
+                            <td data-priority="1" ng-click="EditarProducto(obj)" style="cursor: pointer;"><span>{{obj.Nombre}}</span></td>
+                            <td class="text-center" data-priority="1" ng-click="EditarProducto(obj)" style="cursor: pointer;"><span>{{obj.FechaDesde |date:'dd/MM/yyyy'}}</span></td>
+                            <td class="text-center" data-priority="1" ng-click="EditarProducto(obj)" style="cursor: pointer;"><span>{{obj.FechaHasta |date:'dd/MM/yyyy'}}</span></td>
+                            <td class="text-center">
+                                <span ng-show="obj.Resuelto" class="badge badge-success">Resuelto</span>
+                                <span ng-show="!obj.Resuelto" class="badge badge-warning" style="cursor: pointer" ng-click="ResolverProducto(obj)">No Resuelto</span>
+                            </td>
+                            <td data-priority="1" class="text-right" ng-if="!modoDummy">
+                                <span>
+                                    <button class="btn btn-danger btn-sm waves-effect waves-light" ng-click="EliminarProducto(obj)">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modalEliminarProducto" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Eliminar Producto Faltante</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>¿Confirma eliminar el producto seleccionado?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info waves-effect waves-light" ng-click="ConfirmaEliminarProducto()">Eliminar</button>
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="modalResolver" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="cursor:pointer" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" >Resolver Producto Faltante</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>¿Confirma resolver el producto seleccionado?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary waves-effect waves-light" ng-click="ConfirmaResolverProducto()">Resolver</button>
+                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+</div>

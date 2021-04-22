@@ -1,0 +1,62 @@
+.cabezal{
+    background-color: black !important;
+    color: white !important;
+}
+.cargoContent{
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+@media print {
+    tr.cabezal {
+        background-color: white !important;
+        -webkit-print-color-adjust: exact;
+    }
+    .cargoContent{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .cabezal th {
+        background-color: black !important;
+        color: white !important;
+    }
+    /*.fa { color:transparent; }*/
+    .node{
+        border: 1px solid!important;
+        margin: 15px!important;
+        padding: 15px!important;
+    }
+}
+
+.panel-border{
+    border: 1px solid;
+    margin-left: 10px;
+    padding: 20px;
+}
+
+@media only screen and (max-device-width:670px){
+    .card-box{
+        padding-left: 5px;
+        padding-right: 12px;
+    }
+    .cargoContent{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .panel-border{
+        border: 1px solid;
+        margin-left: 4px;
+        padding: 5px;
+    }
+}
+
+@media only screen and (max-device-width:480px){
+    .card-box{
+        padding-left: 5px;
+        padding-right: 12px;
+    }
+    .cargoContent{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
