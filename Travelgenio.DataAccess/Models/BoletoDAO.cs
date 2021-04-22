@@ -19,15 +19,15 @@ namespace Travelgenio.DataAccess.Models
             GC.Collect();
         }
 
-        public bool Guardar(BoletoDataIn boleto)
+        public Guid Guardar(BoletoDataIn boleto, out Guid codigoBoleto)
         {
             string token = Ejecutar.BeginTransaction();
             try
             {
                 List<DataServiceParameter> lstParams = new List<DataServiceParameter>();
-                Guid codigoBoleto = Guid.NewGuid();
+                codigoBoleto = Guid.NewGuid();
                 int tipoBoleto = 0;
-                bool result = false;
+             
                 foreach (VueloDataIn vuelo in boleto.Vuelos)
                 {
 
@@ -44,10 +44,10 @@ namespace Travelgenio.DataAccess.Models
                     lstParams.Add(DataServiceParameter.Create("@CodigoVuelo", vuelo.CodigoVuelo));
                     Ejecutar.ExecuteNonQuery(sentence, lstParams);
                     tipoBoleto++;
-                    result = true;
+                    codigoBoleto = codigoBoleto;
                 }
                 Ejecutar.CommitTransaction(token);
-               return result;
+               return codigoBoleto;
             }
             catch (Exception ex)
             {
@@ -87,6 +87,7 @@ namespace Travelgenio.DataAccess.Models
                 foreach (VueloDataIn vuelo in boleto.Vuelos)
                 {
                  
+
                     lstParams.Add(DataServiceParameter.Create("@NombrePasajero", boleto.NombrePasajero));
                     lstParams.Add(DataServiceParameter.Create("@FechaNacimiento", boleto.FechaNacimiento));
                     lstParams.Add(DataServiceParameter.Create("@Pasaporte", boleto.Pasaporte));

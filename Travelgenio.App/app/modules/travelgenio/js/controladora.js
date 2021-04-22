@@ -22,7 +22,16 @@ angular.module('Aplicacion').controller('BoletoCTRL', ['$scope', '$state', 'objR
 
             ];
         }
+        //$scope.cambiarTipoViaje = function (tipoViaje) {
+        //    if (tipoViaje == 1) {
+        //        $scope.MostrarIdaVuelta = true;
+        //        $scope.MostrarIda = false;
+        //    } else {
+        //        $scope.MostrarIda = true;
+        //        $scope.MostrarIdaVuelta = false;
+        //    }
 
+        //}
         $scope.setAeropuertoOrigen = function (objSel) {
             $scope.AeropuertoOrigen = objSel;
         };

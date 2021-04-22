@@ -30,14 +30,15 @@ namespace Travelgenio.Sdk
         {
             try
             {
-                bool resultadoGuardar = false;
+                Guid codigoBoleto;
                 using (BoletoDAO boletoDao = new BoletoDAO())
                 {
-                    resultadoGuardar = boletoDao.Guardar(boleto);
+                 
+                      codigoBoleto = boletoDao.Guardar(boleto,out codigoBoleto);
                 }
-                if (resultadoGuardar)
+                if (codigoBoleto != null)
                 {
-                    EnviarMail(boleto);
+                    EnviarMail(boleto,codigoBoleto);
                 }
 
             }
@@ -48,7 +49,7 @@ namespace Travelgenio.Sdk
             }
 
         }
-        public void EnviarMail(BoletoDataIn boleto) {
+        public void EnviarMail(BoletoDataIn boleto,Guid codigoBoleto) {
 
             string templatePdf = ConfigurationManager.AppSettings["templateBoleto"].ToString();
             string templateHtml = ConfigurationManager.AppSettings["avisoBoletoEnviado"].ToString();
@@ -58,7 +59,7 @@ namespace Travelgenio.Sdk
             StreamReader srHtml = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + templateHtml);
             string fileHtml = string.Empty;
             fileHtml = srHtml.ReadToEnd();
-            fileHtml = fileHtml.Replace("{CodigoDeBoleto}", boleto.CodigoBoleto.ToString());
+            fileHtml = fileHtml.Replace("{CodigoBoleto}", codigoBoleto.ToString());
             fileHtml = fileHtml.Replace("{NombrePasajero}", boleto.NombrePasajero);
             fileHtml = fileHtml.Replace("{Pasaporte}", boleto.Pasaporte);
             fileHtml = fileHtml.Replace("{urlBase}", UrlBase);
@@ -72,7 +73,7 @@ namespace Travelgenio.Sdk
             StringBuilder str = new StringBuilder();
             filePdf = filePdf.Replace("{NombrePasajero}", boleto.NombrePasajero);
             filePdf = filePdf.Replace("{Pasaporte}", boleto.Pasaporte);
-            filePdf = filePdf.Replace("{CodigoBoleto}", boleto.CodigoBoleto.ToString());
+            filePdf = filePdf.Replace("{CodigoBoleto}", codigoBoleto.ToString());
 
             foreach (VueloDataIn v in boleto.Vuelos)
             {
@@ -90,7 +91,7 @@ namespace Travelgenio.Sdk
               
             }
             filePdf = filePdf.Replace("{Contenido}", str.ToString());
-            string pathString = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, boleto.CodigoBoleto + ".pdf");
+            string pathString = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, codigoBoleto + ".pdf");
 
             if (System.IO.File.Exists(pathString)) System.IO.File.Delete(pathString);
             var htmlToPdf = new NReco.PdfGenerator.HtmlToPdfConverter();
