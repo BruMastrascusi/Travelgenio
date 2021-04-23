@@ -2,10 +2,12 @@
 USE [TravelgenioVuelos]
 GO
 INSERT [Aeropuertos] ([CodigoAeropuerto], [NombreAeropuerto]) VALUES (N'51f42ec1-5c4c-4a04-9bf7-1f523f89e870', N'Florianopolis, Brasil (FLN)')
+INSERT [Aeropuertos] ([CodigoAeropuerto], [NombreAeropuerto]) VALUES (N'93c2cfce-4514-4cc0-941b-329d7db7e0bc', N'Montevideo, Carrasco (MVD), Uruguay')
 INSERT [Aeropuertos] ([CodigoAeropuerto], [NombreAeropuerto]) VALUES (N'6279a39c-f849-419a-927f-3c8e49e5cfb4', N'Frankfurt, Alemania (FRA)')
 INSERT [Aeropuertos] ([CodigoAeropuerto], [NombreAeropuerto]) VALUES (N'9c0aebb5-b3f7-47ec-9f2e-497eaeaf9bed', N'Lima, Peru (LIM)')
 INSERT [Aeropuertos] ([CodigoAeropuerto], [NombreAeropuerto]) VALUES (N'c61c52a3-16b0-4dc1-a4b5-7538f3acc56e', N'Buenos Aires, Argentina (BUE)')
 INSERT [Aeropuertos] ([CodigoAeropuerto], [NombreAeropuerto]) VALUES (N'd3a4e653-99f1-476c-9170-e610bbd6b5fb', N'Amsterdam, Schiphol (AMS), Países Bajos')
+
 
 
 SET IDENTITY_INSERT  [Boletos] ON 
