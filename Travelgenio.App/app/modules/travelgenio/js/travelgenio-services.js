@@ -29,8 +29,8 @@ app.factory('TravelgenioServices', ['$http', 'APP_CONFIG', '$cookies', function 
     TravelgenioServices.GetAeropuetosOrigen = function () {
         return $http.get(urlBase + 'aeropuertos/obtenerTodos');
     };
-    TravelgenioServices.GetVuelos = function (codigoVuelo) {
-        return $http.get(urlBase + 'vuelos/obtenerVuelo/' + codigoVuelo);
+    TravelgenioServices.GetVuelos = function (codigoVuelo, codigoVueloDestino,fehcaSalida) {
+        return $http.get(urlBase + 'vuelos/obtenerVuelo/' + codigoVuelo + '/' + codigoVueloDestino + '/' + fehcaSalida);
     };
     TravelgenioServices.EditarBoleto = function (obj) {
         return $http.put(urlBase + 'boletos/modificar/', obj);

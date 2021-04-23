@@ -22,16 +22,18 @@ angular.module('Aplicacion').controller('BoletoCTRL', ['$scope', '$state', 'objR
 
             ];
         }
-        //$scope.cambiarTipoViaje = function (tipoViaje) {
-        //    if (tipoViaje == 1) {
-        //        $scope.MostrarIdaVuelta = true;
-        //        $scope.MostrarIda = false;
-        //    } else {
-        //        $scope.MostrarIda = true;
-        //        $scope.MostrarIdaVuelta = false;
-        //    }
+        $scope.cambiarTipoViaje = function (tipoViaje) {
+            if (tipoViaje == 1) {
+                $scope.MostrarIdaVuelta = true;
+                $scope.MostrarIda = false;
+            } else {
+                $scope.MostrarIda = true;
+                $scope.MostrarIdaVuelta = false;
+            }
 
-        //}
+        }
+
+
         $scope.setAeropuertoOrigen = function (objSel) {
             $scope.AeropuertoOrigen = objSel;
         };
@@ -76,7 +78,7 @@ angular.module('Aplicacion').controller('BoletoCTRL', ['$scope', '$state', 'objR
             if (!valida) {
                 return
             }
-            if (moment($scope.objBoleto.FechaDesde) > moment($scope.objBoleto.FechaHasta)) {
+            if (moment($scope.objBoleto.FechaDesde) > moment(new Date($scope.objBoleto.FechaHasta))) {
                 Mensaje.warning("La Fecha Desde no puede ser mayor a la Fecha Hasta.", "Atención");
                 return;
             }
@@ -90,32 +92,53 @@ angular.module('Aplicacion').controller('BoletoCTRL', ['$scope', '$state', 'objR
                 return;
             }
             if ($scope.obj.TipoViaje == 1) {
-                $scope.MostrarIdaVuelta = true;
-                $scope.MostrarIda = false;
-                TravelgenioServices.GetVuelos($scope.AeropuertoOrigen.CodigoAeropuerto)
+              
+                TravelgenioServices.GetVuelos($scope.AeropuertoOrigen.CodigoAeropuerto, $scope.AeropuertoDestino.CodigoAeropuerto, moment(new Date($scope.objBoleto.FechaDesde)).format("YYYY-MM-DD") )
                     .then(function (response) {
-                        $scope.lstVueloIda = response.data;
+                        if (response.data.length == 0) {
+                            Mensaje.warning("No existen vuelos para el origen seleccionado en la fecha: " + moment(new Date($scope.objBoleto.FechaDesde)).format("YYYY-MM-DD"), "Atención");
+                            return;
+                        } else {
+                            $scope.MostrarIdaVuelta = true;
+                            $scope.MostrarIda = false;
+                            $scope.lstVueloIda = response.data;
+                        }
+                
+                        
                     }
                     );
 
-                TravelgenioServices.GetVuelos($scope.AeropuertoDestino.CodigoAeropuerto)
+                TravelgenioServices.GetVuelos($scope.AeropuertoDestino.CodigoAeropuerto, $scope.AeropuertoOrigen.CodigoAeropuerto, moment(new Date($scope.objBoleto.FechaHasta)).format("YYYY-MM-DD") )
                     .then(function (response) {
-                        $scope.lstVueloVuelta = response.data;
+                   
+                        if (response.data.length == 0) {
+                            Mensaje.warning("No existen vuelos para el destino seleccionado en la fecha: " + moment(new Date($scope.objBoleto.FechaHasta)).format("YYYY-MM-DD") , "Atención");
+                        } else {
+                            $scope.lstVueloVuelta = response.data;
+                        }
                     }
                     );
             }
             if ($scope.obj.TipoViaje == 2) {
-                $scope.MostrarIda = true;
-                $scope.MostrarIdaVuelta = false;
-                TravelgenioServices.GetVuelos($scope.AeropuertoOrigen.CodigoAeropuerto)
+              
+                TravelgenioServices.GetVuelos($scope.AeropuertoOrigen.CodigoAeropuerto, $scope.AeropuertoDestino.CodigoAeropuerto,moment(new Date($scope.objBoleto.FechaDesde)).format("YYYY-MM-DD"))
                     .then(function (response) {
-                        $scope.lstVueloIda = response.data;
+                        if (response.data.length == 0) {
+                            Mensaje.warning("No existen vuelos para el origen seleccionado en la fecha: " + moment(new Date($scope.objBoleto.FechaDesde)).format("YYYY-MM-DD"), "Atención");
+                            return;
+                        } else {
+                            $scope.MostrarIda = true;
+                            $scope.MostrarIdaVuelta = false;
+                            $scope.lstVueloIda = response.data;
+                        }
+                        
                     }
                     );
             }
 
         }
         $scope.guardarBoleto = function () {
+    
             var valida = $('#frmBuscar').parsley().validate();
             if (!valida) {
                 return

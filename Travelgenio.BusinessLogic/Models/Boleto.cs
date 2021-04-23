@@ -83,10 +83,10 @@ namespace Travelgenio.Sdk
                 str.Append("<tr>");
                 str.Append("<td style='text-align:right'>"); str.Append(vuelos[0].NombreAeropuerto.ToString()); str.Append("</td>");
                 str.Append("<td style='text-align:right'>"); str.Append(vuelos[0].FechaSalida.ToString()); str.Append("</td>");
-                str.Append("<td style='text-align:right'>"); str.Append(vuelos[0].FechaLlegada.ToString()); str.Append("</td>");
                 str.Append("<td style='text-align:right'>"); str.Append(vuelos[0].NombreAeropuertoDestino.ToString()); str.Append("</td>");
-                str.Append("<td style='text-align:right'>"); str.Append(vuelos[0].FechaSalida.ToString()); str.Append("</td>");
                 str.Append("<td style='text-align:right'>"); str.Append(vuelos[0].FechaLlegada.ToString()); str.Append("</td>");
+                str.Append("<td style='text-align:right'>"); str.Append(vuelos[0].Aerolinea); str.Append("</td>");
+
                 str.Append("</tr>");
               
             }

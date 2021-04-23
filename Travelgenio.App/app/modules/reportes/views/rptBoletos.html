@@ -90,10 +90,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="obj in lstBoletos |filter:filtro | orderBy:orderByField:reverseSort">
-                                <td data-priority="1" ng-hide="true" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.CodigoBoleto}}</span></td>
-                                <td data-priority="1" ng-hide="true" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.CodigoAeropuertoOrigen}}</span></td>
-                                <td data-priority="1" ng-hide="true" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.CodigoAeropuertoDestino}}</span></td>
+                            <tr ng-repeat="obj in lstBoletos | filter:filtro | orderBy:orderByField:reverseSort">
+                                <td data-priority="3" ng-hide="true" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.CodigoBoleto}}</span></td>
+                                <td data-priority="3" ng-hide="true" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.CodigoAeropuertoOrigen}}</span></td>
+                                <td data-priority="3" ng-hide="true" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.CodigoAeropuertoDestino}}</span></td>
                                 <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.NombrePasajero}}</span></td>
                                 <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.Pasaporte}}</span></td>
                                 <td data-priority="3" ng-click="EditarBoleto(obj)" style="cursor: pointer;"><span>{{obj.Email}}</span></td>

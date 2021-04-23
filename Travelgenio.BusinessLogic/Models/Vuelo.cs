@@ -15,14 +15,14 @@ namespace Travelgenio.BusinessLogic
             GC.Collect();
         }
 
-        public List<VueloDataOut> ObtenerVuelos(Guid codioOrigen)
+        public List<VueloDataOut> ObtenerVuelos(Guid codioOrigen, Guid codioDestino, DateTime fechaSalida)
         {
             try
             {
                 using (VueloDAO vuelosDAO = new VueloDAO())
                 {
 
-                   return vuelosDAO.ObtenerVuelos(codioOrigen);
+                   return vuelosDAO.ObtenerVuelos(codioOrigen, codioDestino, fechaSalida);
                 }
 
             }

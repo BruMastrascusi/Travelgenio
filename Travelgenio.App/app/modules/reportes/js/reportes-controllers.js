@@ -119,28 +119,50 @@ app.controller('BoletosEditCTRL', ['$scope', '$state', 'TravelgenioServices', 'o
                 return;
             }
             if ($scope.objEditar.TipoViaje == 1) {
-                $scope.MostrarIdaVuelta = true;
-                $scope.MostrarIda = false;
-                TravelgenioServices.GetVuelos($scope.AeropuertoOrigen)
+              
+                TravelgenioServices.GetVuelos($scope.AeropuertoOrigen, $scope.AeropuertoDestino, moment(new Date($scope.objEditar.FechaDesde)).format("YYYY-MM-DD"))
                     .then(function (response) {
-                        $scope.lstVueloIda = [];
+                       
+                        if (response.data.length == 0) {
+                            Mensaje.warning("No existen vuelos para el origen seleccionado en la fecha: " + moment(new Date($scope.objEditar.FechaDesde)).format("YYYY-MM-DD"), "Atención");
+                            return;
+                        } else {
+                            $scope.MostrarIdaVuelta = true;
+                            $scope.MostrarIda = false;
+                            $scope.lstVueloIda = [];
+                            $scope.lstVueloIda = response.data;
+                        }
                         $scope.lstVueloIda = response.data;
                     }
                     );
 
-                TravelgenioServices.GetVuelos($scope.AeropuertoDestino)
+                TravelgenioServices.GetVuelos($scope.AeropuertoDestino, $scope.AeropuertoOrigen, moment(new Date($scope.objEditar.FechaHasta)).format("YYYY-MM-DD"))
                     .then(function (response) {
-                        $scope.lstVueloVuelta = [];
+              
+                        if (response.data.length == 0) {
+                            Mensaje.warning("No existen vuelos para el destino seleccionado en la fecha: " + moment(new Date($scope.objEditar.FechaHasta)).format("YYYY-MM-DD"), "Atención");
+                            return;
+                        } else {
+                            $scope.lstVueloVuelta = [];
+                            $scope.lstVueloIda = response.data;
+                        }
                         $scope.lstVueloVuelta = response.data;
                     }
                     );
             }
             if ($scope.objEditar.TipoViaje == 2) {
-                $scope.MostrarIda = true;
-                $scope.MostrarIdaVuelta = false;
-                TravelgenioServices.GetVuelos($scope.AeropuertoOrigen)
+                
+                TravelgenioServices.GetVuelos($scope.AeropuertoOrigen, $scope.AeropuertoDestino, moment(new Date($scope.objEditar.FechaDesde)).format("YYYY-MM-DD"))
                     .then(function (response) {
-                        $scope.lstVueloIda = response.data;
+                        if (response.data.length == 0) {
+                            Mensaje.warning("No existen vuelos para el origen seleccionado en la fecha: " + moment(new Date($scope.objEditar.FechaDesde)).format("YYYY-MM-DD"), "Atención");
+                            return;
+                        } else {
+                            $scope.MostrarIda = true;
+                            $scope.MostrarIdaVuelta = false;
+                            $scope.lstVueloIda = response.data;
+                        }
+                      
                     }
                     );
             }

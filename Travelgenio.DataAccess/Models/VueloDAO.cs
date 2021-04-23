@@ -20,7 +20,7 @@ namespace Travelgenio.DataAccess.Models
         }
 
 
-        public List<VueloDataOut> ObtenerVuelos(Guid codioOrigen)
+        public List<VueloDataOut> ObtenerVuelos(Guid codioOrigen, Guid codioDestino, DateTime fechaSalida)
         {
             List<VueloDataOut> vuelos = new List<VueloDataOut>();
             try
@@ -29,9 +29,12 @@ namespace Travelgenio.DataAccess.Models
                                         (select nombreaeropuerto from aeropuertos where codigoaeropuerto = v.AeropuertoDestino) as NombreAeropuertoDestino,
                                          FechaLlegada
                                          from Vuelos V  inner join Aeropuertos A on A.CodigoAeropuerto = V.AeropuertoOrigen
-                                           Where V.AeropuertoOrigen =  @CodigoVueloIda";
+                                          Where V.AeropuertoOrigen =  @CodigoVueloIda and CONVERT(DATE,V.FechaSalida) = @FechaSalida 
+                                          And v.AeropuertoDestino = @AeropuertoDestino";
                 List<DataServiceParameter> lstParams = new List<DataServiceParameter>();
                 lstParams.Add(DataServiceParameter.Create("@CodigoVueloIda", codioOrigen));
+                lstParams.Add(DataServiceParameter.Create("@FechaSalida", fechaSalida));
+                lstParams.Add(DataServiceParameter.Create("@AeropuertoDestino", codioDestino));
                 DataTable data = Ejecutar.GetDatatable(devolverVuelos, lstParams);
                
 
@@ -47,7 +50,6 @@ namespace Travelgenio.DataAccess.Models
                         vuelo.FechaLlegada = Convert.ToDateTime(row["FechaLlegada"]);
                         vuelo.Aerolinea = Convert.ToString(row["Aerolinea"].ToString());
                         vuelo.DatosGenerales = vuelo.NombreAeropuerto + "  " + vuelo.FechaSalida + "  /  " + vuelo.NombreAeropuertoDestino + "   " + vuelo.FechaLlegada + "   " + vuelo.Aerolinea;
-
                         vuelos.Add(vuelo);
                     }
                 }
