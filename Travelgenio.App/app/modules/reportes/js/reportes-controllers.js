@@ -132,7 +132,7 @@ app.controller('BoletosEditCTRL', ['$scope', '$state', 'TravelgenioServices', 'o
                             $scope.lstVueloIda = [];
                             $scope.lstVueloIda = response.data;
                         }
-                        $scope.lstVueloIda = response.data;
+                         
                     }
                     );
 
@@ -144,9 +144,9 @@ app.controller('BoletosEditCTRL', ['$scope', '$state', 'TravelgenioServices', 'o
                             return;
                         } else {
                             $scope.lstVueloVuelta = [];
-                            $scope.lstVueloIda = response.data;
+                            $scope.lstVueloVuelta = response.data;
                         }
-                        $scope.lstVueloVuelta = response.data;
+                       
                     }
                     );
             }
@@ -168,20 +168,30 @@ app.controller('BoletosEditCTRL', ['$scope', '$state', 'TravelgenioServices', 'o
             }
       }
         $scope.editarBoleto = function () {
-        var valida = $('#frmBuscar').parsley().validate();
-        if (!valida) {
-            return
-        }
+            var valida;
+            if ($scope.objEditar.TipoViaje == 1) {
+                valida = $('#frmBuscar').parsley().validate();
+            } else {
+                valida = $('#frmBuscarIda').parsley().validate();
+            }
+            if (!valida) {
+                return
 
+            }
             if (moment($scope.objEditar.FechaNacimiento) > moment(new Date())) {
             Mensaje.warning("La Fecha Nacimiento no puede ser mayor a la Fecha Actual.", "Atención");
             return;
         }
-        $scope.objEditar.listVuelos = new Object();
-        $scope.objEditar.Vuelos = [];
-        $scope.objEditar.Vuelos.push({ CodigoVuelo: $scope.objEditar.CodigoVueloIda });
-        $scope.objEditar.Vuelos.push({ CodigoVuelo: $scope.objEditar.CodigoVueloVuelta })
-        console.log($scope.objEditar)
+    
+            $scope.objEditar.listVuelos = new Object();
+            $scope.objEditar.Vuelos = [];
+            if ($scope.objEditar.TipoViaje == 1) {
+                $scope.objEditar.Vuelos.push({ CodigoVuelo: $scope.objEditar.CodigoVueloIda });
+                $scope.objEditar.Vuelos.push({ CodigoVuelo: $scope.objEditar.CodigoVueloVuelta })
+            } else {
+                $scope.objEditar.Vuelos.push({ CodigoVuelo: $scope.objEditar.CodigoVueloIda });
+            }
+
         TravelgenioServices.EditarBoleto($scope.objEditar)
             .then(function (response) {
                 Mensaje.success("Boleto editado con éxito.", "Ok");

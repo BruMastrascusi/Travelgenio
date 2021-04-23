@@ -82,3 +82,4 @@ C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.App\bin\Travelgenio.A
 C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.App\bin\Travelgenio.App.pdb
 C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.App\obj\Debug\Travelgenio.App.dll
 C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.App\obj\Debug\Travelgenio.App.pdb
+C:\Users\Bruno Mastra\source\repos\Travelgenio\Travelgenio.App\obj\Debug\Travelgenio.App.csprojAssemblyReference.cache

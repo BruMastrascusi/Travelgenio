@@ -151,3 +151,70 @@
         </div>
     </div>
 </form>
+
+
+<form id="frmBuscarIda" name="frmBuscarIda">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group" ng-if=" MostrarIda">
+                <label for="rol" class="control-label">Vuelo Ida<span class="text-danger">*</span></label>
+                <select class="form-control" id="rol"
+                        ng-model="objEditar.CodigoVueloIda" data-parsley-required
+                        ng-options="obj.CodigoVuelo as obj.DatosGenerales for obj in lstVueloIda">
+                    <option value="">Seleccione...</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group" ng-if="MostrarIda">
+                <label for="rol" class="control-label">Vuelo Vuelta<span class="text-danger">*</span></label>
+                <select class="form-control" id="rol"
+                        ng-model="objEditar.CodigoVueloVuelta" data-parsley-required
+                        ng-options="obj.CodigoVuelo as obj.DatosGenerales for obj in lstVueloVuelta">
+                    <option value="">Seleccione...</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr ng-if="MostrarIda" />
+    <div class="row" ng-if="MostrarIda">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Nombre Pasajero<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Nombre Pasajero"
+                           ng-model="objEditar.NombrePasajero" data-parsley-required>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="form-group">
+                    <label class="control-label">Pasaporte<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Pasaporte"
+                           ng-model="objEditar.Pasaporte" data-parsley-required>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="form-group">
+                    <label class="control-label">Email<span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" id="apellido" placeholder="Email"
+                           ng-model="objEditar.Email" data-parsley-required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Fecha Nacimiento<span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" placeholder="Fecha Nacimiento"
+                           ng-model="objEditar.FechaNacimiento" data-parsley-required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" ng-if="MostrarIda">
+            <button class="btn btn-info"
+                    ng-click="editarBoleto()" style="margin-bottom: 5px">
+                Enviar
+            </button>
+        </div>
+    </div>
+</form>

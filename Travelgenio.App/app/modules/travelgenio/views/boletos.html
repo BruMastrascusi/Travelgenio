@@ -91,7 +91,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="form-group" ng-show="MostrarIdaVuelta || MostrarIda">
+            <div class="form-group" ng-show="MostrarIdaVuelta ">
                 <label for="rol" class="control-label">Vuelo Ida<span class="text-danger">*</span></label>
                 <select class="form-control" id="rol"
                         ng-model="objBoleto.CodigoVueloIda" data-parsley-required
@@ -111,8 +111,8 @@
             </div>
         </div>
     </div>
-    <hr ng-show="MostrarIdaVuelta || MostrarIda" />
-    <div class="row" ng-show="MostrarIdaVuelta || MostrarIda">
+    <hr ng-show="MostrarIdaVuelta  " />
+    <div class="row" ng-show="MostrarIdaVuelta ">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -145,7 +145,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3" ng-show="MostrarIdaVuelta || MostrarIda">
+        <div class="col-md-3" ng-show="MostrarIdaVuelta">
             <button class="btn btn-info"
                     ng-click="guardarBoleto()" style="margin-bottom: 5px">
                 Enviar
@@ -154,5 +154,61 @@
     </div>
 </form>
 
+<form id="frmBuscarIda" name="frmBuscarIda">
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group" ng-show="MostrarIda">
+                <label for="rol" class="control-label">Vuelo Ida<span class="text-danger">*</span></label>
+                <select class="form-control" id="rol"
+                        ng-model="objBoleto.CodigoVueloIda" data-parsley-required
+                        ng-options="obj.CodigoVuelo as obj.DatosGenerales for obj in lstVueloIda">
+                    <option value="">Seleccione...</option>
+                </select>
+            </div>
+        </div>
+        
+    </div>
+    <hr ng-show=" MostrarIda" />
+    <div class="row" ng-show="  MostrarIda">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Nombre Pasajero<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Nombre Pasajero"
+                           ng-model="objBoleto.NombrePasajero" data-parsley-required="">
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="form-group">
+                    <label class="control-label">Pasaporte<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Pasaporte"
+                           ng-model="objBoleto.Pasaporte" data-parsley-required="">
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="form-group">
+                    <label class="control-label">Email<span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" id="apellido" placeholder="Email"
+                           ng-model="objBoleto.Email" data-parsley-required="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Fecha Nacimiento<span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" placeholder="Fecha Nacimiento"
+                           ng-model="objBoleto.FechaNacimiento" data-parsley-required="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" ng-show="MostrarIda">
+            <button class="btn btn-info"
+                    ng-click="guardarBoleto()" style="margin-bottom: 5px">
+                Enviar
+            </button>
+        </div>
+    </div>
+</form>
  

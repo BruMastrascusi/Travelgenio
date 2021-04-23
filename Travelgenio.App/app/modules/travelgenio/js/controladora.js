@@ -139,7 +139,12 @@ angular.module('Aplicacion').controller('BoletoCTRL', ['$scope', '$state', 'objR
         }
         $scope.guardarBoleto = function () {
     
-            var valida = $('#frmBuscar').parsley().validate();
+            var valida;
+            if ($scope.obj.TipoViaje == 1) {
+                valida = $('#frmBuscar').parsley().validate();
+            } else {
+                valida = $('#frmBuscarIda').parsley().validate();
+            }
             if (!valida) {
                 return
               
@@ -150,8 +155,13 @@ angular.module('Aplicacion').controller('BoletoCTRL', ['$scope', '$state', 'objR
             }
             $scope.objBoleto.listVuelos = new Object();
             $scope.objBoleto.Vuelos = [];
-            $scope.objBoleto.Vuelos.push({ CodigoVuelo: $scope.objBoleto.CodigoVueloIda });
-            $scope.objBoleto.Vuelos.push({ CodigoVuelo: $scope.objBoleto.CodigoVueloVuelta })
+            if ($scope.obj.TipoViaje == 1) {
+                $scope.objBoleto.Vuelos.push({ CodigoVuelo: $scope.objBoleto.CodigoVueloIda });
+                $scope.objBoleto.Vuelos.push({ CodigoVuelo: $scope.objBoleto.CodigoVueloVuelta })
+            } else {
+                $scope.objBoleto.Vuelos.push({ CodigoVuelo: $scope.objBoleto.CodigoVueloIda });
+            }
+            
             TravelgenioServices.GuardarBoleto($scope.objBoleto)
                 .then(function (response) {
                     Mensaje.success("Boleto guardado con éxito.", "Ok");
