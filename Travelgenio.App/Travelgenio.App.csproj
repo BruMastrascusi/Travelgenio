@@ -121,7 +121,6 @@
     <Content Include="app\js\controllers.js" />
     <Content Include="app\js\directives.js" />
     <Content Include="app\js\services.js" />
-    <Content Include="app\js\util.js" />
     <Content Include="app\lib\angular-bootstrap\index.js" />
     <Content Include="app\lib\angular-bootstrap\ui-bootstrap-csp.css" />
     <Content Include="app\lib\angular-bootstrap\ui-bootstrap-tpls-1.1.2.min.js" />

@@ -2,7 +2,7 @@
 
 angular.module('Aplicacion').controller('BoletoCTRL', ['$scope', '$state', 'objReference', 'TravelgenioServices', 'Mensaje',
     function ($scope, $state, objReference, TravelgenioServices, Mensaje) {
-
+    
         init();
         function init() {
             CargarAeropuertoOrigen();

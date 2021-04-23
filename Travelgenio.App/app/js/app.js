@@ -24,7 +24,7 @@ var interceptor = function ($q, $rootScope, $log, Mensaje) {
         'response': function (result) {
             $rootScope.ajaxCount--;
             //$('#loading-indicatornew').hide();
-            if ($rootScope.ajaxCount <= 0) {
+            if ($rootScope.ajaxCount <= 0 || isNaN($rootScope.ajaxCount)) {
                 $('#loading-indicatornew').hide();
             }
             return result;

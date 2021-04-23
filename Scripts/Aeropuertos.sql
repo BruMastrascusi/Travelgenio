@@ -7,7 +7,7 @@ INSERT [Aeropuertos] ([CodigoAeropuerto], [NombreAeropuerto]) VALUES (N'9c0aebb5
 INSERT [Aeropuertos] ([CodigoAeropuerto], [NombreAeropuerto]) VALUES (N'c61c52a3-16b0-4dc1-a4b5-7538f3acc56e', N'Buenos Aires, Argentina (BUE)')
 INSERT [Aeropuertos] ([CodigoAeropuerto], [NombreAeropuerto]) VALUES (N'd3a4e653-99f1-476c-9170-e610bbd6b5fb', N'Amsterdam, Schiphol (AMS), Países Bajos')
 
-
+ 
 SET IDENTITY_INSERT  [Boletos] ON 
 
 INSERT [Boletos] ([CodigoBoleto], [CodigoVuelo], [NombrePasajero], [FechaNacimiento], [Pasaporte], [Email], [TipoDeVuelo], [IdBoleto]) VALUES (N'3c4019af-788b-490b-98ce-7c834de865e1', N'42ee8c08-33e0-40f2-a791-1fbd9bb8e83b', N'Bruno Mastrascusi                                                                                   ', CAST(N'1984-03-04' AS Date), N'BNA578987                                                                                           ', N'brunomastrascusi@gmail.com                                                                          ', 0, 22)
@@ -21,9 +21,13 @@ SET IDENTITY_INSERT  [Boletos] OFF
 
 
 
+
+
 /* ********************************************************************************************
  FECHAS = LAS FECHAS DE IDA 17/06/2021 Y FECHAS VUELTAS 17/08/2021
 ************************************************************************************************/
+
+
 
 --VUELOS
 --******************************************************************************************************
@@ -84,8 +88,10 @@ SET IDENTITY_INSERT  [Boletos] OFF
    insert into vuelos values (NEWID(),'2021-06-17 11:34:09.000','2021-07-17 11:34:09.000',
  'Pluna','93C2CFCE-4514-4CC0-941B-329D7DB7E0BC','C61C52A3-16B0-4DC1-A4B5-7538F3ACC56E')
  -- Vuelo Buenos Aires - Montevideo
- insert into vuelos values (NEWID(),'2021-08-17 11:34:09.000','2021-08-17 11:34:09.000',
+ insert into vuelos values (NEWID(),'2021-08-18 11:34:09.000','2021-08-18 11:34:09.000',
  'Pluna','C61C52A3-16B0-4DC1-A4B5-7538F3ACC56E','93C2CFCE-4514-4CC0-941B-329D7DB7E0BC')
 
  --******************************************************************************************************
 
+
+ select * from vuelos where AeropuertoOrigen= '93C2CFCE-4514-4CC0-941B-329D7DB7E0BC'
