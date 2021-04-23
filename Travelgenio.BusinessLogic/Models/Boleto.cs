@@ -167,12 +167,12 @@ namespace Travelgenio.Sdk
                 }
                 catch (Exception ex)
                 {
-
+                    throw ex;
                 }
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
         }
 

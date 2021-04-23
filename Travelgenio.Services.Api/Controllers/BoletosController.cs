@@ -6,8 +6,6 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using Travelgenio.BusinessLogic;
-using Travelgenio.BusinessLogic.Models;
 using Travelgenio.Sdk;
 using Travelgenio.Sdk.DataOut;
 
@@ -137,26 +135,6 @@ namespace Travelgenio.Services.Api.Controllers
             return pasajeros;
         }
 
-        //*VER SI LO PRECISOOOOO*//
-        //***********************//
-        [HttpGet]
-        [Route("api/boletos/obtenerItinearios")]
-        public List<ItinerarioDataOut> ObtenerItinerarios()
-        {
-            List<ItinerarioDataOut> itinerarios = new List<ItinerarioDataOut>();
-            try
-            {
-                using (Itinerario itinerario = new Itinerario())
-                {
-                    itinerarios = itinerario.ObtenerItinerarios();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message));
-            }
-
-            return itinerarios;
-        }
+    
     }
 }

@@ -44,7 +44,7 @@ namespace Travelgenio.DataAccess.Models
                     lstParams.Add(DataServiceParameter.Create("@CodigoVuelo", vuelo.CodigoVuelo));
                     Ejecutar.ExecuteNonQuery(sentence, lstParams);
                     tipoBoleto++;
-                    codigoBoleto = codigoBoleto;
+                 
                 }
                 Ejecutar.CommitTransaction(token);
                return codigoBoleto;

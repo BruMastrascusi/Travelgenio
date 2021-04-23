@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Models\AeropuertoDAO.cs" />
     <Compile Include="Models\BoletoDAO.cs" />
-    <Compile Include="Models\ItinearioDAO.cs" />
     <Compile Include="Models\VueloDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SDK\Ejecutar.cs" />

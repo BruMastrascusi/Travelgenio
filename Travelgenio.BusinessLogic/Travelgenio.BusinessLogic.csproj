@@ -47,8 +47,6 @@
   <ItemGroup>
     <Compile Include="Models\Aeropuerto.cs" />
     <Compile Include="Models\Boleto.cs" />
-    <Compile Include="Models\Itinerario.cs" />
-    <Compile Include="Models\Pais.cs" />
     <Compile Include="Models\Vuelo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
