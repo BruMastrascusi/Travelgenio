@@ -29,6 +29,7 @@ SET IDENTITY_INSERT  [Boletos] OFF
 
 --VUELOS
 --******************************************************************************************************
+set dateformat ymd
  --Vuelo Argentina - Holanda
  insert into vuelos values (NEWID(),'2021-06-17 10:34:09.000','2021-07-17 10:34:09.000',
  'Aerolineas Argentinas','C61C52A3-16B0-4DC1-A4B5-7538F3ACC56E','D3A4E653-99F1-476C-9170-E610BBD6B5FB')
