@@ -1,46 +1,137 @@
-d3a4e653-99f1-476c-9170-e610bbd6b5fb
-
-
-Select V.CodigoVuelo , A.NombreAeropuerto, FechaSalida, Aerolinea,  
-                                        (select nombreaeropuerto from aeropuertos where codigoaeropuerto = v.AeropuertoDestino) as NombreAeropuertoDestino,
-                                         FechaLlegada
-                                         from Vuelos V  inner join Aeropuertos A on A.CodigoAeropuerto = V.AeropuertoOrigen
-                                           Where V.AeropuertoOrigen =  'd3a4e653-99f1-476c-9170-e610bbd6b5fb'  
-										   and v.AeropuertoDestino = 'C61C52A3-16B0-4DC1-A4B5-7538F3ACC56E'
-										   and CONVERT(DATE,V.FechaSalida) = '20210817'
-
-
-										   select * from Aeropuertos 
-										   where CodigoAeropuerto ='d3a4e653-99f1-476c-9170-e610bbd6b5fb'  
-
-										   select * from boletos
-
-										   Select B.CodigoBoleto,B.CodigoVuelo , B.NombrePasajero,B.Pasaporte,B.FechaNacimiento,B.Email, V.FechaSalida,
-										 V.FechaLlegada, 
-                                        (select A.CodigoAeropuerto from Aeropuertos A
-							             Inner Join Vuelos V on V.AeropuertoOrigen= A.CodigoAeropuerto 
-										 Where V.CodigoVuelo = B.CodigoVuelo) As CodigoAeropuertoOrigen,
-                                        (select A.CodigoAeropuerto from Aeropuertos A
-							              Inner Join Vuelos V on V.AeropuertoDestino= A.CodigoAeropuerto 
-										  Where V.CodigoVuelo = B.CodigoVuelo)As CodigoAeropuertoDestino,
-							             (select A.NombreAeropuerto from Aeropuertos A
-							                Inner Join Vuelos V on V.AeropuertoOrigen= A.CodigoAeropuerto 
-										 	Where V.CodigoVuelo = B.CodigoVuelo) As AeropuertoOrigen,
-										 (select A.NombreAeropuerto from Aeropuertos A
-							                 Inner Join Vuelos V on V.AeropuertoDestino= A.CodigoAeropuerto 
-										     Where V.CodigoVuelo = B.CodigoVuelo) As AeropuertoDestino,
-											TipoDeVuelo
-									From Boletos B 
-									Inner Join Vuelos v on V.CodigoVuelo = b.CodigoVuelo
-									Order by CodigoBoleto, TipoDeVuelo
-
-					Select V.CodigoVuelo , A.NombreAeropuerto, FechaSalida, Aerolinea,  
-                                        (select nombreaeropuerto from aeropuertos where codigoaeropuerto = v.AeropuertoDestino) as NombreAeropuertoDestino,
-                                         FechaLlegada
-                                         from Vuelos V  inner join Aeropuertos A on A.CodigoAeropuerto = V.AeropuertoOrigen
-                                          Where V.AeropuertoOrigen =  '51f42ec1-5c4c-4a04-9bf7-1f523f89e870' 
-										  and CONVERT(DATE,V.FechaSalida) = '20210817' 
-                                          And v.AeropuertoDestino = '9c0aebb5-b3f7-47ec-9f2e-497eaeaf9bed'
-
-
-										  select * from vuelos where CodigoVuelo = '23D19CEB-D240-4B9C-9A53-07E831E7A644'
+USE [master]
+GO
+CREATE DATABASE [TravelgenioVuelos]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'TravelgenioVuelos', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\TravelgenioVuelos.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'TravelgenioVuelos_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\TravelgenioVuelos_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [TravelgenioVuelos] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [TravelgenioVuelos].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [TravelgenioVuelos] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET RECOVERY FULL 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET  MULTI_USER 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [TravelgenioVuelos] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [TravelgenioVuelos] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'TravelgenioVuelos', N'ON'
+GO
+ALTER DATABASE [TravelgenioVuelos] SET QUERY_STORE = OFF
+GO
+USE [TravelgenioVuelos]
+GO
+/****** Object:  Table [dbo].[Aeropuertos]    Script Date: 23/4/2021 15:15:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Aeropuertos](
+	[CodigoAeropuerto] [uniqueidentifier] NOT NULL,
+	[NombreAeropuerto] [char](100) NULL,
+ CONSTRAINT [PK_Aeropuertos] PRIMARY KEY CLUSTERED 
+(
+	[CodigoAeropuerto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Boletos]    Script Date: 23/4/2021 15:15:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Boletos](
+	[CodigoBoleto] [uniqueidentifier] NOT NULL,
+	[CodigoVuelo] [uniqueidentifier] NOT NULL,
+	[NombrePasajero] [char](100) NULL,
+	[FechaNacimiento] [date] NULL,
+	[Pasaporte] [nchar](100) NULL,
+	[Email] [char](100) NULL,
+	[TipoDeVuelo] [int] NULL,
+	[IdBoleto] [int] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_Boletos_1] PRIMARY KEY CLUSTERED 
+(
+	[IdBoleto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Vuelos]    Script Date: 23/4/2021 15:15:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Vuelos](
+	[CodigoVuelo] [uniqueidentifier] NOT NULL,
+	[FechaSalida] [datetime] NULL,
+	[FechaLlegada] [datetime] NULL,
+	[Aerolinea] [char](100) NULL,
+	[AeropuertoOrigen] [uniqueidentifier] NULL,
+	[AeropuertoDestino] [uniqueidentifier] NULL,
+ CONSTRAINT [PK_Vuelos] PRIMARY KEY CLUSTERED 
+(
+	[CodigoVuelo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+USE [master]
+GO
+ALTER DATABASE [TravelgenioVuelos] SET  READ_WRITE 
+GO
