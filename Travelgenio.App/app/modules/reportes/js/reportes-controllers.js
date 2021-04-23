@@ -127,8 +127,8 @@ app.controller('BoletosEditCTRL', ['$scope', '$state', 'TravelgenioServices', 'o
                             Mensaje.warning("No existen vuelos para el origen seleccionado en la fecha: " + moment(new Date($scope.objEditar.FechaDesde)).format("YYYY-MM-DD"), "Atención");
                             return;
                         } else {
-                            $scope.MostrarIdaVuelta = true;
-                            $scope.MostrarIda = false;
+                            $scope.MostrarIdaVuelta = 1;
+                            $scope.MostrarIda = 0;
                             $scope.lstVueloIda = [];
                             $scope.lstVueloIda = response.data;
                         }
@@ -158,8 +158,8 @@ app.controller('BoletosEditCTRL', ['$scope', '$state', 'TravelgenioServices', 'o
                             Mensaje.warning("No existen vuelos para el origen seleccionado en la fecha: " + moment(new Date($scope.objEditar.FechaDesde)).format("YYYY-MM-DD"), "Atención");
                             return;
                         } else {
-                            $scope.MostrarIda = true;
-                            $scope.MostrarIdaVuelta = false;
+                            $scope.MostrarIda = 1;
+                            $scope.MostrarIdaVuelta = 0;
                             $scope.lstVueloIda = response.data;
                         }
                       

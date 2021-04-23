@@ -86,10 +86,10 @@
     </div>
 
 </form>
-<form id="frmBuscar" name="frmBuscar">
+<form id="frmBuscar" name="frmBuscar" ng-if="MostrarIdaVuelta == 1">
     <div class="row">
         <div class="col-md-12">
-            <div class="form-group" ng-if="MostrarIdaVuelta || MostrarIda">
+            <div class="form-group">
                 <label for="rol" class="control-label">Vuelo Ida<span class="text-danger">*</span></label>
                 <select class="form-control" id="rol"
                         ng-model="objEditar.CodigoVueloIda" data-parsley-required
@@ -99,7 +99,7 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="form-group" ng-if="MostrarIdaVuelta">
+            <div class="form-group"  >
                 <label for="rol" class="control-label">Vuelo Vuelta<span class="text-danger">*</span></label>
                 <select class="form-control" id="rol"
                         ng-model="objEditar.CodigoVueloVuelta" data-parsley-required
@@ -109,8 +109,8 @@
             </div>
         </div>
     </div>
-    <hr ng-if="MostrarIdaVuelta || MostrarIda" />
-    <div class="row" ng-if="MostrarIdaVuelta || MostrarIda">
+    <hr  />
+    <div class="row"  >
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -143,7 +143,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3" ng-if="MostrarIdaVuelta || MostrarIda">
+        <div class="col-md-3" >
             <button class="btn btn-info"
                     ng-click="editarBoleto()" style="margin-bottom: 5px">
                 Enviar
@@ -153,10 +153,10 @@
 </form>
 
 
-<form id="frmBuscarIda" name="frmBuscarIda">
+<form id="frmBuscarIda" name="frmBuscarIda" ng-if="MostrarIda == 1">
     <div class="row">
         <div class="col-md-12">
-            <div class="form-group" ng-if=" MostrarIda">
+            <div class="form-group" >
                 <label for="rol" class="control-label">Vuelo Ida<span class="text-danger">*</span></label>
                 <select class="form-control" id="rol"
                         ng-model="objEditar.CodigoVueloIda" data-parsley-required
@@ -165,19 +165,9 @@
                 </select>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="form-group" ng-if="MostrarIda">
-                <label for="rol" class="control-label">Vuelo Vuelta<span class="text-danger">*</span></label>
-                <select class="form-control" id="rol"
-                        ng-model="objEditar.CodigoVueloVuelta" data-parsley-required
-                        ng-options="obj.CodigoVuelo as obj.DatosGenerales for obj in lstVueloVuelta">
-                    <option value="">Seleccione...</option>
-                </select>
-            </div>
-        </div>
     </div>
-    <hr ng-if="MostrarIda" />
-    <div class="row" ng-if="MostrarIda">
+    <hr  />
+    <div class="row"  >
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -210,7 +200,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3" ng-if="MostrarIda">
+        <div class="col-md-3"  >
             <button class="btn btn-info"
                     ng-click="editarBoleto()" style="margin-bottom: 5px">
                 Enviar
